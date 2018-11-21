@@ -7,12 +7,14 @@
     "rollup": "^0.67.3",
     "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-typescript2": "^0.18.0",
+    "tslint": "^5.11.0",
     "typescript": "^3.1.6",
     "uglify-js": "^3.4.9"
   },
   "scripts": {
     "build": "yarn rollup && yarn uglify",
     "rollup": "rollup -c",
-    "uglify": "uglifyjs \"./tspublic/epaper-template.js\" -o \"./output/epaper-template.min.js\" -cm"
+    "uglify": "uglifyjs \"./tspublic/epaper-template.js\" -o \"./output/epaper-template.min.js\" -cm",
+    "lint": "tslint -c tslint.json \"./src/**/*.ts\""
   }
 }

@@ -10,12 +10,13 @@
 	    var swipeBannerUrl_frontpage_2 = hasSecondFrontpage.indexOf('SECONDFRONTPAGE') !== -1 && hasSecondFrontpage
 	        ? swipeBannerUrl + "/Image.ashx?PageNumber=2&ImageType=Normal"
 	        : '';
+	    var topBackgroundColor = '#{BACKGROUNDCOLORTOP}';
 	    var backgroundColor = '#{BACKGROUNDCOLOR}';
 	    var mediaUrl = '${MEDIA_URL}';
 	    var domainString = '#{DOMAIN}';
-	    var trackingPixel1 = '#{TRACKINGPIXEL1}';
-	    var trackingPixel2 = '#{TRACKINGPIXEL2}';
-	    var trackingPixel3 = '#{TRACKINGPIXEL3}';
+	    var trackingPixel1 = '#{TRACKINGURL1}';
+	    var trackingPixel2 = '#{TRACKINGURL2}';
+	    var trackingPixel3 = '#{TRACKINGURL3}';
 	    var domainUrl = '';
 	    if (domainString.indexOf('DOMAIN') === -1) {
 	        switch (domainString) {
@@ -100,19 +101,22 @@
 	                epaperframe_ok: 'goframe',
 	                epaperframe_name: window.name.toString(),
 	                epaperframe_random: getEpaperRandom.toString(),
-	                epaperframe_bannercolor: backgroundColor.toString()
+	                epaperframe_bannercolor: topBackgroundColor.toString()
 	            };
-	            if (trackingPixel1.indexOf('TRACKINGPIXEL1') === -1) {
+	            if (trackingPixel1.indexOf('TRACKINGURL1') === -1 &&
+	                trackingPixel1.indexOf('ebimg.dk') === -1) {
 	                var trackingImg1 = document.createElement('img');
 	                trackingImg1.src = trackingPixel1;
 	                body.appendChild(trackingImg1);
 	            }
-	            if (trackingPixel2.indexOf('TRACKINGPIXEL2') === -1) {
+	            if (trackingPixel2.indexOf('TRACKINGURL2') === -1 &&
+	                trackingPixel2.indexOf('ebimg.dk') === -1) {
 	                var trackingImg2 = document.createElement('img');
 	                trackingImg2.src = trackingPixel2;
 	                body.appendChild(trackingImg2);
 	            }
-	            if (trackingPixel3.indexOf('TRACKINGPIXEL3') === -1) {
+	            if (trackingPixel3.indexOf('TRACKINGURL3') === -1 &&
+	                trackingPixel3.indexOf('ebimg.dk') === -1) {
 	                var trackingImg3 = document.createElement('img');
 	                trackingImg3.src = trackingPixel3;
 	                body.appendChild(trackingImg3);
@@ -127,12 +131,15 @@
 	     * Add all styling options to head
 	     */
 	    var headFrag = document.createDocumentFragment();
-	    var linkTag = document.createElement('style');
-	    linkTag.innerHTML =
-	        '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
+	    var linkTag = document.createElement('link');
+	    linkTag.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
+	    linkTag.rel = 'stylesheet';
 	    headFrag.appendChild(linkTag);
 	    var styleTag = document.createElement('style');
-	    var moreStyling = "#epaper_eb_banner_container { background-color: " + backgroundColor + "; }\n  #epaper_eb_banner_logo { background-color: " + backgroundColor + "; }\n  #epaper_eb_banner_logo > div { background: url(" + mediaUrl + ") left center no-repeat; background-size:contain; }";
+	    var bgStyling = backgroundColor.indexOf('TOPBACKGROUNDCOLOR') === -1
+	        ? "#epaper_eb_banner_container { background-color: " + topBackgroundColor + "; }"
+	        : '';
+	    var moreStyling = bgStyling + "\n  #epaper_eb_banner_logo { background-color: " + topBackgroundColor + "; }\n  #epaper_eb_banner_logo > div { background: url(" + mediaUrl + ") left center no-repeat; background-size:contain; }";
 	    styleTag.innerHTML = styles + moreStyling;
 	    headFrag.appendChild(styleTag);
 	    document.head.appendChild(headFrag);
