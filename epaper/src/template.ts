@@ -33,20 +33,26 @@ function init() {
 
   const getUrlParameter = sParam => {
     const sPageURL = window.location.search.substring(1);
-    const sURLconstiables = sPageURL.split('&');
-    let sParameterName: string[];
-
-    for (let i = 0; i < sURLconstiables.length; i++) {
-      sParameterName = sURLconstiables[i].split('=');
-      if (sParameterName[0] === sParam) {
-        return sParameterName[1];
-      }
+    if (sPageURL !== '') {
+      const regExp = new RegExp(sParam + '=(.*?)[&]');
+      return sPageURL.match(regExp)[1];
+    } else {
+      return '';
     }
+    // console.log('sPageURL', sPageURL);
+
+    // const sURLconstiables = sPageURL.split('&');
+    // let sParameterName: string[];
+    // for (let i = 0; i < sURLconstiables.length; i++) {
+    //   sParameterName = sURLconstiables[i].split('=');
+    //   if (sParameterName[0] === sParam) {
+    //     return sParameterName[1];
+    //   }
+    // }
   };
   const getEpaperURL = getUrlParameter('src');
-  const epaper_originurl = getEpaperURL
-    ? decodeURIComponent(getEpaperURL)
-    : domainUrl;
+  const epaper_originurl =
+    getEpaperURL !== '' ? decodeURIComponent(getEpaperURL) : domainUrl;
 
   const urlqueorand = swipeBannerUrl.indexOf('?') !== -1 ? '&' : '?';
   const theTarget =
@@ -118,6 +124,7 @@ function init() {
       epaper_eb_banner_pointer.classList.add('fade');
 
       const getEpaperRandom = getUrlParameter('r');
+
       const pass_epaperframe_data = {
         epaperframe_bannercolor: backgroundColorTop.toString(),
         epaperframe_name: window.name.toString(),

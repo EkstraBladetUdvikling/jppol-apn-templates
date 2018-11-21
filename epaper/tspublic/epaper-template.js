@@ -10,7 +10,7 @@
 	    var swipeBannerUrl_frontpage_2 = hasSecondFrontpage.indexOf('SECONDFRONTPAGE') !== -1 && hasSecondFrontpage
 	        ? swipeBannerUrl + "/Image.ashx?PageNumber=2&ImageType=Normal"
 	        : '';
-	    var topBackgroundColor = '#{BACKGROUNDCOLORTOP}';
+	    var backgroundColorTop = '#{BACKGROUNDCOLORTOP}';
 	    var backgroundColor = '#{BACKGROUNDCOLOR}';
 	    var mediaUrl = '${MEDIA_URL}';
 	    var domainString = '#{DOMAIN}';
@@ -33,19 +33,25 @@
 	    }
 	    var getUrlParameter = function (sParam) {
 	        var sPageURL = window.location.search.substring(1);
-	        var sURLconstiables = sPageURL.split('&');
-	        var sParameterName;
-	        for (var i = 0; i < sURLconstiables.length; i++) {
-	            sParameterName = sURLconstiables[i].split('=');
-	            if (sParameterName[0] === sParam) {
-	                return sParameterName[1];
-	            }
+	        if (sPageURL !== '') {
+	            var regExp = new RegExp(sParam + '=(.*?)[&]');
+	            return sPageURL.match(regExp)[1];
 	        }
+	        else {
+	            return '';
+	        }
+	        // console.log('sPageURL', sPageURL);
+	        // const sURLconstiables = sPageURL.split('&');
+	        // let sParameterName: string[];
+	        // for (let i = 0; i < sURLconstiables.length; i++) {
+	        //   sParameterName = sURLconstiables[i].split('=');
+	        //   if (sParameterName[0] === sParam) {
+	        //     return sParameterName[1];
+	        //   }
+	        // }
 	    };
 	    var getEpaperURL = getUrlParameter('src');
-	    var epaper_originurl = getEpaperURL
-	        ? decodeURIComponent(getEpaperURL)
-	        : domainUrl;
+	    var epaper_originurl = getEpaperURL !== '' ? decodeURIComponent(getEpaperURL) : domainUrl;
 	    var urlqueorand = swipeBannerUrl.indexOf('?') !== -1 ? '&' : '?';
 	    var theTarget = swipeBannerUrl +
 	        urlqueorand +
@@ -98,10 +104,10 @@
 	            epaper_eb_banner_pointer.classList.add('fade');
 	            var getEpaperRandom = getUrlParameter('r');
 	            var pass_epaperframe_data = {
-	                epaperframe_ok: 'goframe',
+	                epaperframe_bannercolor: backgroundColorTop.toString(),
 	                epaperframe_name: window.name.toString(),
-	                epaperframe_random: getEpaperRandom.toString(),
-	                epaperframe_bannercolor: topBackgroundColor.toString()
+	                epaperframe_ok: 'goframe',
+	                epaperframe_random: getEpaperRandom.toString()
 	            };
 	            if (trackingPixel1.indexOf('TRACKINGURL1') === -1 &&
 	                trackingPixel1.indexOf('ebimg.dk') === -1) {
@@ -136,10 +142,10 @@
 	    linkTag.rel = 'stylesheet';
 	    headFrag.appendChild(linkTag);
 	    var styleTag = document.createElement('style');
-	    var bgStyling = backgroundColor.indexOf('TOPBACKGROUNDCOLOR') === -1
-	        ? "#epaper_eb_banner_container { background-color: " + topBackgroundColor + "; }"
+	    var bgStyling = backgroundColor.indexOf('BACKGROUNDCOLOR') === -1
+	        ? "#epaper_eb_banner_container { background-color: " + backgroundColor + "; }"
 	        : '';
-	    var moreStyling = bgStyling + "\n  #epaper_eb_banner_logo { background-color: " + topBackgroundColor + "; }\n  #epaper_eb_banner_logo > div { background: url(" + mediaUrl + ") left center no-repeat; background-size:contain; }";
+	    var moreStyling = bgStyling + "\n  #epaper_eb_banner_logo { background-color: " + backgroundColorTop + "; }\n  #epaper_eb_banner_logo > div { background: url(" + mediaUrl + ") left center no-repeat; background-size:contain; }";
 	    styleTag.innerHTML = styles + moreStyling;
 	    headFrag.appendChild(styleTag);
 	    document.head.appendChild(headFrag);
