@@ -1,31 +1,36 @@
-var epaper = (function (exports) {
+(function () {
 	'use strict';
 
 	var styles = "html, body {\n\twidth: 100%;\n\theight: 100%;\n}\nbody, td, th {\n\tfont-family: Tahoma, Geneva, sans-serif;\n\tfont-size: 14px;\n\tcolor: #333;\n\tline-height: 21px;\n\n\tbackground-color:#fff;\n}\n#epaper_eb_banner,\n#epaper_eb_banner_container,\n#epaper_eb_banner_logo,\n#epaper_eb_banner_txt,\n#epaper_eb_banner_pointer {\n\tposition:absolute;\n\twidth: 100%;\n\theight: 100%;\n\tcursor: pointer;\n\tbackground-repeat: no-repeat;\n\tbackground-position: center center;\n\tbackground-size:contain;\n}\n#epaper_eb_banner {\n\t/*background-color:#fff;*/\n\n\tbackground: -webkit-linear-gradient(rgba(0,0,0,0.52), rgba(0,0,0,0.0));\n\tbackground: -ms-linear-gradient(rgba(0,0,0,0.52), rgba(0,0,0,0.0));\n\tbackground: linear-gradient(rgba(0,0,0,0.52), rgba(0,0,0,0.0));\n\toverflow: hidden;\n}\n#epaper_eb_banner_container {}\n\n#epaper_eb_banner_logo {\n\t-webkit-box-sizing: border-box;\n\t-moz-box-sizing: border-box;\n\tbox-sizing: border-box;\n\theight:51px;\n\twidth:100%;\n\tpadding:10px;\n}\n#epaper_eb_banner_logo > div {\n\theight:100%;\n\twidth:100%;\n\tdisplay:block;\n}\n#epaper_eb_banner_content {\n\tposition: absolute;\n\tmargin-top:51px;\n\tdisplay: flex;\n\tjustify-content: center;\n\twidth: 100%;\n\theight: calc(100% - 51px);\n}\n\n.epaper_eb_banner_content_left, .epaper_eb_banner_content_right {\n\twidth: 40px;\n}\n.epaper_eb_banner_content_center {\n\theight: 100%;\n}\n.epaper_eb_banner_content_right {}\n.epaper_eb_banner_content_right .lastpage_arrow {\n\tfont-size:40px;\n\tfont-weight:bold;\n\tmargin-top:20px;\n\tcolor:#fff;\n}\n.epaper_eb_banner_content_right .nextpage_arrow {\n\tfont-size:57px;\n\tfont-weight:bold;\n\tmargin-top: calc(50vh - 122px);\n\tmargin-left:-10px;\n\tcolor:#fff;\n}\n.epaper_eb_banner_content_center img {\n\tposition: relative;\n\theight: 515px;\n\twidth: auto;\n\ttop:50%;\n\ttransform:translateY(-50%);\n\n\t-moz-box-shadow: \t3px 3px 5px 1px rgba(0,0,0,0.3);\n\t-webkit-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.3);\n\tbox-shadow: \t\t3px 3px 5px 1px rgba(0,0,0,0.3);\n}\n.epaper_eb_banner_content_center img:nth-child(2) {\n\t-moz-box-shadow: \t4px 3px 5px 1px rgba(0,0,0,0.3);\n\t-webkit-box-shadow: 4px 3px 5px 1px rgba(0,0,0,0.3);\n\tbox-shadow: \t\t4px 3px 5px 1px rgba(0,0,0,0.3);\n}\n\n#epaper_eb_banner_txt {}\n#epaper_eb_banner_pointer {\n\twidth:30px;\n\theight:30px;\n\toverflow:visible;\n\tleft:50%;\n\ttop:50%;\n\t-webkit-transform: translate(203px,34px) scale(1.1) rotate(-27deg);\n\ttransform: translate(203px,34px) scale(1.1) rotate(-27deg);\n\t-webkit-transition: all 0.3s ease;\n\ttransition: all 0.3s ease;\n}\n#epaper_eb_banner_pointer svg {\n\twidth:100%;\n\tfilter: drop-shadow(0px 3px 3px rgba(0,0,0,0.35));\n}\n.pointer_stroke {\n\tfill: #000;\n}\n.pointer_fill {\n\tfill: url(#grad1);\n}\n#epaper_eb_banner_container:hover #epaper_eb_banner_pointer {\n\t-webkit-transform: translate(200px,30px) scale(1) rotate(-32deg);\n\ttransform: translate(200px,30px) scale(1) rotate(-32deg);\n\n}\n.moveL {\n\t-webkit-animation: moveLeft 3s ease-out 1;\n\tanimation: moveLeft 3s ease-out 1;\n}\n.moveR {\n\t-webkit-animation: moveRight 3s ease-out 1;\n\tanimation: moveRight 3s ease-out 1;\n}\n@-webkit-keyframes moveRight {\n\t0% {-webkit-transform: translateX(0%);}\n\t10% {-webkit-transform: translateX(100%);}\n\t100% {-webkit-transform: translateX(100%);}\n}\n@keyframes moveRight {\n\t0% {transform: translateX(0%);}\n\t10% {transform: translateX(100%);}\n\t100% {transform: translateX(100%);}\n}\n@-webkit-keyframes moveLeft {\n\t0% {-webkit-transform: translateX(0%);}\n\t10% {-webkit-transform: translateX(-100%);}\n\t100% {-webkit-transform: translateX(-100%);}\n}\n@keyframes moveLeft {\n\t0% {transform: translateX(0%);}\n\t10% {transform: translateX(-100%);}\n\t100% {transform: translateX(-100%);}\n}";
 
 	function init() {
 	    var swipeBannerUrl = '#{SWIPEBANNERURL}';
-	    var swipeBannerUrl_frontpage = '#{SWIPEBANNERURL_FRONTPAGE}';
-	    var swipeBannerUrl_frontpage_2 = '#{SWIPEBANNERURL_FRONTPAGE_2}';
+	    var swipeBannerUrl_frontpage = swipeBannerUrl + "/Image.ashx?PageNumber=1&ImageType=Normal";
+	    var hasSecondFrontpage = '#{SECONDFRONTPAGE}';
+	    var swipeBannerUrl_frontpage_2 = hasSecondFrontpage.indexOf('SECONDFRONTPAGE') !== -1 && hasSecondFrontpage
+	        ? swipeBannerUrl + "/Image.ashx?PageNumber=2&ImageType=Normal"
+	        : '';
 	    var backgroundColor = '#{BACKGROUNDCOLOR}';
 	    var mediaUrl = '${MEDIA_URL}';
 	    var domainString = '#{DOMAIN}';
-	    var trackingPixel1 = '#{TRACKINPIXEL1}';
-	    var trackingPixel2 = '#{TRACKINPIXEL2}';
-	    var trackingPixel3 = '#{TRACKINPIXEL3}';
+	    var trackingPixel1 = '#{TRACKINGPIXEL1}';
+	    var trackingPixel2 = '#{TRACKINGPIXEL2}';
+	    var trackingPixel3 = '#{TRACKINGPIXEL3}';
 	    var domainUrl = '';
-	    switch (domainString) {
-	        case 'Ekstra Bladet':
-	            domainUrl = 'https://ekstrabladet.dk';
-	            break;
-	        case 'JP':
-	            domainUrl = 'https://jp.dk';
-	            break;
-	        case 'Politiken':
-	            domainUrl = 'https://politiken.dk';
-	            break;
+	    if (domainString.indexOf('DOMAIN') === -1) {
+	        switch (domainString) {
+	            case 'JP':
+	                domainUrl = 'https://jp.dk';
+	                break;
+	            case 'Politiken':
+	                domainUrl = 'https://politiken.dk';
+	                break;
+	            case 'Ekstra Bladet':
+	                domainUrl = 'https://ekstrabladet.dk';
+	                break;
+	        }
 	    }
-	    var getUrlParameter = function getUrlParameter(sParam) {
+	    var getUrlParameter = function (sParam) {
 	        var sPageURL = window.location.search.substring(1);
 	        var sURLconstiables = sPageURL.split('&');
 	        var sParameterName;
@@ -55,7 +60,7 @@ var epaper = (function (exports) {
 	    var epaper_eb_banner_content = document.createElement('div');
 	    epaper_eb_banner_content.id = 'epaper_eb_banner_content';
 	    var frontPage = "<img src='" + swipeBannerUrl_frontpage + "' />";
-	    var frontPage2 = swipeBannerUrl_frontpage_2.length > 2
+	    var frontPage2 = swipeBannerUrl_frontpage_2 !== ''
 	        ? "<img src='" + swipeBannerUrl_frontpage_2 + "' />"
 	        : '';
 	    var content = "<div class=\"epaper_eb_banner_content_left\"></div>\n                            <div id=\"epaper_eb_cover\" class=\"epaper_eb_banner_content_center\">\n                            " + frontPage + frontPage2 + "\n                            </div>\n                            <div class=\"epaper_eb_banner_content_right\">\n                              <i class=\"material-icons lastpage_arrow\">last_page</i>\n                              <i class=\"material-icons nextpage_arrow\">chevron_right</i>\n                            </div>";
@@ -97,17 +102,17 @@ var epaper = (function (exports) {
 	                epaperframe_random: getEpaperRandom.toString(),
 	                epaperframe_bannercolor: backgroundColor.toString()
 	            };
-	            if (trackingPixel1.length > 2) {
+	            if (trackingPixel1.indexOf('TRACKINGPIXEL1') === -1) {
 	                var trackingImg1 = document.createElement('img');
 	                trackingImg1.src = trackingPixel1;
 	                body.appendChild(trackingImg1);
 	            }
-	            if (trackingPixel2.length > 2) {
+	            if (trackingPixel2.indexOf('TRACKINGPIXEL2') === -1) {
 	                var trackingImg2 = document.createElement('img');
 	                trackingImg2.src = trackingPixel2;
 	                body.appendChild(trackingImg2);
 	            }
-	            if (trackingPixel3.length > 2) {
+	            if (trackingPixel3.indexOf('TRACKINGPIXEL3') === -1) {
 	                var trackingImg3 = document.createElement('img');
 	                trackingImg3.src = trackingPixel3;
 	                body.appendChild(trackingImg3);
@@ -136,9 +141,6 @@ var epaper = (function (exports) {
 	     */
 	    body.appendChild(container);
 	}
+	init();
 
-	exports.init = init;
-
-	return exports;
-
-}({}));
+}());

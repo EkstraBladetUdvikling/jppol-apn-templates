@@ -1,30 +1,37 @@
 import { styles } from './styles';
 
-export function init() {
-  const swipeBannerUrl = '#{SWIPEBANNERURL}';
-  const swipeBannerUrl_frontpage = '#{SWIPEBANNERURL_FRONTPAGE}';
-  const swipeBannerUrl_frontpage_2 = '#{SWIPEBANNERURL_FRONTPAGE_2}';
-  const backgroundColor = '#{BACKGROUNDCOLOR}';
-  const mediaUrl = '${MEDIA_URL}';
+function init() {
+  const swipeBannerUrl: string = '#{SWIPEBANNERURL}';
+  const swipeBannerUrl_frontpage: string = `${swipeBannerUrl}/Image.ashx?PageNumber=1&ImageType=Normal`;
+  const hasSecondFrontpage: string | boolean = '#{SECONDFRONTPAGE}';
+  const swipeBannerUrl_frontpage_2: string =
+    hasSecondFrontpage.indexOf('SECONDFRONTPAGE') !== -1 && hasSecondFrontpage
+      ? `${swipeBannerUrl}/Image.ashx?PageNumber=2&ImageType=Normal`
+      : '';
+
+  const backgroundColor: string = '#{BACKGROUNDCOLOR}';
+  const mediaUrl: string = '${MEDIA_URL}';
   const domainString: string = '#{DOMAIN}';
-  const trackingPixel1 = '#{TRACKINGPIXEL1}';
-  const trackingPixel2 = '#{TRACKINGPIXEL2}';
-  const trackingPixel3 = '#{TRACKINGPIXEL3}';
+  const trackingPixel1: string = '#{TRACKINGPIXEL1}';
+  const trackingPixel2: string = '#{TRACKINGPIXEL2}';
+  const trackingPixel3: string = '#{TRACKINGPIXEL3}';
 
   let domainUrl: string = '';
-  switch (domainString) {
-    case 'Ekstra Bladet':
-      domainUrl = 'https://ekstrabladet.dk';
-      break;
-    case 'JP':
-      domainUrl = 'https://jp.dk';
-      break;
-    case 'Politiken':
-      domainUrl = 'https://politiken.dk';
-      break;
+  if (domainString.indexOf('DOMAIN') === -1) {
+    switch (domainString) {
+      case 'JP':
+        domainUrl = 'https://jp.dk';
+        break;
+      case 'Politiken':
+        domainUrl = 'https://politiken.dk';
+        break;
+      case 'Ekstra Bladet':
+        domainUrl = 'https://ekstrabladet.dk';
+        break;
+    }
   }
 
-  const getUrlParameter = function getUrlParameter(sParam) {
+  const getUrlParameter = sParam => {
     const sPageURL = window.location.search.substring(1);
     const sURLconstiables = sPageURL.split('&');
     let sParameterName: string[];
@@ -59,7 +66,7 @@ export function init() {
   epaper_eb_banner_content.id = 'epaper_eb_banner_content';
   const frontPage = `<img src='${swipeBannerUrl_frontpage}' />`;
   const frontPage2 =
-    swipeBannerUrl_frontpage_2.length > 2
+    swipeBannerUrl_frontpage_2 !== ''
       ? `<img src='${swipeBannerUrl_frontpage_2}' />`
       : '';
   const content = `<div class="epaper_eb_banner_content_left"></div>
@@ -118,17 +125,17 @@ export function init() {
         epaperframe_bannercolor: backgroundColor.toString()
       };
 
-      if (trackingPixel1.length > 2) {
+      if (trackingPixel1.indexOf('TRACKINGPIXEL1') === -1) {
         const trackingImg1 = document.createElement('img');
         trackingImg1.src = trackingPixel1;
         body.appendChild(trackingImg1);
       }
-      if (trackingPixel2.length > 2) {
+      if (trackingPixel2.indexOf('TRACKINGPIXEL2') === -1) {
         const trackingImg2 = document.createElement('img');
         trackingImg2.src = trackingPixel2;
         body.appendChild(trackingImg2);
       }
-      if (trackingPixel3.length > 2) {
+      if (trackingPixel3.indexOf('TRACKINGPIXEL3') === -1) {
         const trackingImg3 = document.createElement('img');
         trackingImg3.src = trackingPixel3;
         body.appendChild(trackingImg3);
@@ -167,3 +174,5 @@ export function init() {
    */
   body.appendChild(container);
 }
+
+init();

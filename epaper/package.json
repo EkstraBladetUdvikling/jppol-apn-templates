@@ -11,6 +11,7 @@
     "uglify-js": "^3.4.9"
   },
   "scripts": {
+    "build": "yarn rollup && yarn uglify",
     "rollup": "rollup -c",
     "uglify": "uglifyjs \"./tspublic/epaper-template.js\" -o \"./output/epaper-template.min.js\" -cm"
   }
