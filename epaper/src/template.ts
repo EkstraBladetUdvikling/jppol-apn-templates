@@ -1,67 +1,67 @@
-import { styles } from "./styles";
+import { styles } from './styles';
 
-(function() {
-  const SWIPEBANNERURL = "#{SWIPEBANNERURL}";
-  const SWIPEBANNERURL_FRONTPAGE = "#{SWIPEBANNERURL_FRONTPAGE}";
-  const SWIPEBANNERURL_FRONTPAGE_2 = "#{SWIPEBANNERURL_FRONTPAGE_2}";
-  const backgroundColor = "#{BACKGROUNDCOLOR}";
-  const mediaUrl = "${MEDIA_URL}";
-  const domainString: string = "#{DOMAIN}";
-  const trackingPixel1 = "#{TRACKINPIXEL1}";
-  const trackingPixel2 = "#{TRACKINPIXEL2}";
-  const trackingPixel3 = "#{TRACKINPIXEL3}";
+export function init() {
+  const swipeBannerUrl = '#{SWIPEBANNERURL}';
+  const swipeBannerUrl_frontpage = '#{SWIPEBANNERURL_FRONTPAGE}';
+  const swipeBannerUrl_frontpage_2 = '#{SWIPEBANNERURL_FRONTPAGE_2}';
+  const backgroundColor = '#{BACKGROUNDCOLOR}';
+  const mediaUrl = '${MEDIA_URL}';
+  const domainString: string = '#{DOMAIN}';
+  const trackingPixel1 = '#{TRACKINGPIXEL1}';
+  const trackingPixel2 = '#{TRACKINGPIXEL2}';
+  const trackingPixel3 = '#{TRACKINGPIXEL3}';
 
-  let domainUrl: string = "";
+  let domainUrl: string = '';
   switch (domainString) {
-    case "Ekstra Bladet":
-      domainUrl = "https://ekstrabladet.dk";
+    case 'Ekstra Bladet':
+      domainUrl = 'https://ekstrabladet.dk';
       break;
-    case "JP":
-      domainUrl = "https://jp.dk";
+    case 'JP':
+      domainUrl = 'https://jp.dk';
       break;
-    case "Politiken":
-      domainUrl = "https://politiken.dk";
+    case 'Politiken':
+      domainUrl = 'https://politiken.dk';
       break;
   }
 
   const getUrlParameter = function getUrlParameter(sParam) {
     const sPageURL = window.location.search.substring(1);
-    const sURLconstiables = sPageURL.split("&");
+    const sURLconstiables = sPageURL.split('&');
     let sParameterName: string[];
 
     for (let i = 0; i < sURLconstiables.length; i++) {
-      sParameterName = sURLconstiables[i].split("=");
+      sParameterName = sURLconstiables[i].split('=');
       if (sParameterName[0] === sParam) {
         return sParameterName[1];
       }
     }
   };
-  const getEpaperURL = getUrlParameter("src");
+  const getEpaperURL = getUrlParameter('src');
   const epaper_originurl = getEpaperURL
     ? decodeURIComponent(getEpaperURL)
     : domainUrl;
 
-  const urlqueorand = SWIPEBANNERURL.indexOf("?") !== -1 ? "&" : "?";
+  const urlqueorand = swipeBannerUrl.indexOf('?') !== -1 ? '&' : '?';
   const theTarget =
-    SWIPEBANNERURL +
+    swipeBannerUrl +
     urlqueorand +
-    "t=" +
+    't=' +
     encodeURIComponent(new Date().toString());
 
   const body = document.body;
-  const container = document.createElement("div");
-  container.id = "epaper_eb_banner";
-  const epaper_eb_banner_container = document.createElement("div");
-  epaper_eb_banner_container.id = "epaper_eb_banner_container";
+  const container = document.createElement('div');
+  container.id = 'epaper_eb_banner';
+  const epaper_eb_banner_container = document.createElement('div');
+  epaper_eb_banner_container.id = 'epaper_eb_banner_container';
   const htmlString = `<div id="epaper_eb_banner_logo"><div></div></div>`;
   epaper_eb_banner_container.innerHTML = htmlString;
-  const epaper_eb_banner_content = document.createElement("div");
-  epaper_eb_banner_content.id = "epaper_eb_banner_content";
-  const frontPage = `<img src='${SWIPEBANNERURL_FRONTPAGE}' />`;
+  const epaper_eb_banner_content = document.createElement('div');
+  epaper_eb_banner_content.id = 'epaper_eb_banner_content';
+  const frontPage = `<img src='${swipeBannerUrl_frontpage}' />`;
   const frontPage2 =
-    SWIPEBANNERURL_FRONTPAGE_2.length > 2
-      ? `<img src='${SWIPEBANNERURL_FRONTPAGE_2}' />`
-      : "";
+    swipeBannerUrl_frontpage_2.length > 2
+      ? `<img src='${swipeBannerUrl_frontpage_2}' />`
+      : '';
   const content = `<div class="epaper_eb_banner_content_left"></div>
                             <div id="epaper_eb_cover" class="epaper_eb_banner_content_center">
                             ${frontPage}${frontPage2}
@@ -72,11 +72,11 @@ import { styles } from "./styles";
                             </div>`;
   epaper_eb_banner_content.innerHTML = content;
   epaper_eb_banner_container.appendChild(epaper_eb_banner_content);
-  const epaper_eb_banner_txt = document.createElement("div");
-  epaper_eb_banner_txt.id = "epaper_eb_banner_txt";
+  const epaper_eb_banner_txt = document.createElement('div');
+  epaper_eb_banner_txt.id = 'epaper_eb_banner_txt';
   epaper_eb_banner_container.appendChild(epaper_eb_banner_txt);
-  const epaper_eb_banner_pointer = document.createElement("div");
-  epaper_eb_banner_pointer.id = "epaper_eb_banner_pointer";
+  const epaper_eb_banner_pointer = document.createElement('div');
+  epaper_eb_banner_pointer.id = 'epaper_eb_banner_pointer';
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 23">
                 <path class="pointer_stroke" d="M6 0h2v1H6V0zM0 8v3h1V9h2V8H0zM1 11h1v1H1V11zM3 9h1v1H3V9zM16 8h1v1h-1V8zM2 12h1v2H2V12zM3 14h1v2H3V14zM4 16h1v3H4V16zM16 17h1v3h-1V17zM12 7h2V6h-3v4h1V7zM14 7v4h1V8h1V7H14zM16 23v-3h-1v2H6v-3H5v4H16zM4 10v1h1v4h1V1H5v9H4zM9 6h2V5H9V1H8v9h1V6zM17 9h1v8h-1V9z"/>
                 <polygon class="pointer_fill" points="6 1 6 15 5 15 5 11 4 11 4 10 3 10 3 9 1 9 1 11 2 11 2 12 3 12 3 14 4 14 4 16 5 16 5 19 6 19 6 22 15 22 15 20 16 20 16 17 17 17 17 9 16 9 16 8 15 8 15 11 14 11 14 7 12 7 12 10 11 10 11 6 9 6 9 10 8 10 8 1 " />
@@ -100,36 +100,36 @@ import { styles } from "./styles";
   //   openAdLayer("moveR");
   // });
 
-  epaper_eb_banner_container.addEventListener("click", () => {
-    openAdLayer("moveL");
+  epaper_eb_banner_container.addEventListener('click', () => {
+    openAdLayer('moveL');
   });
 
   function openAdLayer(classArg) {
     if (!epaper_eb_banner_content.classList.contains(classArg)) {
       epaper_eb_banner_content.classList.add(classArg);
-      epaper_eb_banner_txt.classList.add("fade");
-      epaper_eb_banner_pointer.classList.add("fade");
+      epaper_eb_banner_txt.classList.add('fade');
+      epaper_eb_banner_pointer.classList.add('fade');
 
-      var getEpaperRandom = getUrlParameter("r");
+      var getEpaperRandom = getUrlParameter('r');
       var pass_epaperframe_data = {
-        epaperframe_ok: "goframe",
+        epaperframe_ok: 'goframe',
         epaperframe_name: window.name.toString(),
         epaperframe_random: getEpaperRandom.toString(),
         epaperframe_bannercolor: backgroundColor.toString()
       };
 
       if (trackingPixel1.length > 2) {
-        const trackingImg1 = document.createElement("img");
+        const trackingImg1 = document.createElement('img');
         trackingImg1.src = trackingPixel1;
         body.appendChild(trackingImg1);
       }
       if (trackingPixel2.length > 2) {
-        const trackingImg2 = document.createElement("img");
+        const trackingImg2 = document.createElement('img');
         trackingImg2.src = trackingPixel2;
         body.appendChild(trackingImg2);
       }
       if (trackingPixel3.length > 2) {
-        const trackingImg3 = document.createElement("img");
+        const trackingImg3 = document.createElement('img');
         trackingImg3.src = trackingPixel3;
         body.appendChild(trackingImg3);
       }
@@ -148,11 +148,11 @@ import { styles } from "./styles";
    * Add all styling options to head
    */
   const headFrag = document.createDocumentFragment();
-  const linkTag = document.createElement("style");
+  const linkTag = document.createElement('style');
   linkTag.innerHTML =
     '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
   headFrag.appendChild(linkTag);
-  const styleTag = document.createElement("style");
+  const styleTag = document.createElement('style');
 
   const moreStyling = `#epaper_eb_banner_container { background-color: ${backgroundColor}; }
   #epaper_eb_banner_logo { background-color: ${backgroundColor}; }
@@ -166,4 +166,4 @@ import { styles } from "./styles";
    * Add banner to body
    */
   body.appendChild(container);
-})();
+}
