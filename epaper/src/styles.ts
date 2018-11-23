@@ -147,3 +147,62 @@ body, td, th {
 	10% {transform: translateX(-100%);}
 	100% {transform: translateX(-100%);}
 }`;
+
+export const onSiteStyling = `.epaper_banner_container {position: relative; display: inline-block;} .epaperframe_expanded, .epaperframe_expanded_ios, .epaper_overlay_expanded, .epaper_overlay_btn {  z-index: 81000 !important; background: rgba(0,0,0,0.5);
+  -webkit-transition-duration:0.5s; transition-duration:0.5s; -webkit-transition-timing-function: ease-out; transition-timing-function: ease-out; }
+  .epaper_overlay_expanded { position: fixed; width: 100%; height: 100%; left: 0px; top: 0px; }
+  .epaperframe_expanded { position: fixed !important; width: 96% !important; left: 2%; top: 51px;
+                height: 94vh !important;
+                height: -webkit-calc(100vh - 51px) !important;
+                height: -moz-calc(100vh - 51px) !important;
+                height: calc(100vh - 51px) !important; }
+.epaperframe_expanded_ios { position: fixed !important; width: 100% !important; left: 0%; top: 51px; }
+.epaperframe_wrapper_ios { overflow: hidden !important; }
+.epaperframe_expanded_body { position: absolute; overflow: hidden; width: 100% !important; height: 100% !important;}
+.epaper_overlay_btn {
+  right: calc(2% + 5px); bottom: 5px;
+  width: 9vh;
+  height: 9vh;
+  max-width: 16.4vmin !important;
+  max-height: 16.4vmin !important;
+  min-width: 88px !important;
+  min-height: 88px !important;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.handle_epaper_btn {
+  display: block;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  background: none;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 0;
+  cursor: pointer;
+}
+.handle_epaper_btn svg {
+  width: 40%; height: auto; margin-left: auto;  margin-right: auto;
+}
+.handle_epaper_btn svg:hover {
+  width: 56%; height: auto;
+}
+.handle_epaper_btn .epaper_layer_expand {
+  fill: #fff;
+}
+.pol_expanded {
+  position: absolute;
+  height:100% !important;
+  width:100% !important;
+  left: 0px !important;
+  top: 0px !important;
+  margin: 0px !important;
+  padding: 0px !important;
+}`;

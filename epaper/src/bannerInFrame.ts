@@ -1,6 +1,6 @@
 import { styles } from './styles';
 
-function init() {
+export function bannerInFrame() {
   const swipeBannerUrl: string = '#{SWIPEBANNERURL}';
   const swipeBannerUrl_frontpage: string = `${swipeBannerUrl}/Image.ashx?PageNumber=1&ImageType=Normal`;
   const hasSecondFrontpage: string | boolean = '#{SECONDFRONTPAGE}';
@@ -32,13 +32,19 @@ function init() {
   }
 
   const getUrlParameter = sParam => {
-    const sPageURL = window.location.search.substring(1);
-    if (sPageURL !== '') {
-      const regExp = new RegExp(sParam + '=(.*?)[&]');
-      return sPageURL.match(regExp)[1];
-    } else {
-      return '';
+    if (window.location) {
+      const sPageURL = window.location.search.substring(1);
+      if (sPageURL !== '') {
+        const regExp = new RegExp(sParam + '=(.*?)[&]');
+        let returnString = '';
+        if (sPageURL.match(regExp)) {
+          returnString = sPageURL.match(regExp)[1];
+        }
+        return returnString;
+      }
     }
+    return '';
+
     // console.log('sPageURL', sPageURL);
 
     // const sURLconstiables = sPageURL.split('&');
@@ -123,13 +129,15 @@ function init() {
       epaper_eb_banner_txt.classList.add('fade');
       epaper_eb_banner_pointer.classList.add('fade');
 
-      const getEpaperRandom = getUrlParameter('r');
-
+      let getEpaperRandom = getUrlParameter('r');
+      if (getEpaperRandom === '') {
+        getEpaperRandom = new Date().getTime().toString();
+      }
       const pass_epaperframe_data = {
         epaperframe_bannercolor: backgroundColorTop.toString(),
         epaperframe_name: window.name.toString(),
         epaperframe_ok: 'goframe',
-        epaperframe_random: getEpaperRandom.toString()
+        epaperframe_random: getEpaperRandom
       };
 
       if (
@@ -193,5 +201,3 @@ function init() {
    */
   body.appendChild(container);
 }
-
-init();
