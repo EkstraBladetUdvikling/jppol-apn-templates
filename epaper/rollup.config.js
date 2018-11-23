@@ -11,7 +11,7 @@ const plugins = [
 
 export default [
   {
-    input: './src/template.ts',
+    input: './src/index.ts',
     output: {
       file: './tspublic/epaper-template.js',
       format: 'iife',

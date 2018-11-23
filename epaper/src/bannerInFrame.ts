@@ -1,35 +1,37 @@
+import { openOverlay } from './bannerOnSite';
 import { styles } from './styles';
 
 export function bannerInFrame() {
   const swipeBannerUrl: string = '#{SWIPEBANNERURL}';
   const swipeBannerUrl_frontpage: string = `${swipeBannerUrl}/Image.ashx?PageNumber=1&ImageType=Normal`;
-  const hasSecondFrontpage: string | boolean = '#{SECONDFRONTPAGE}';
+  const hasSecondFrontpage: string = '#{SECONDFRONTPAGE}';
   const swipeBannerUrl_frontpage_2: string =
-    hasSecondFrontpage.indexOf('SECONDFRONTPAGE') !== -1 && hasSecondFrontpage
+    hasSecondFrontpage.indexOf('SECONDFRONTPAGE') === -1 &&
+    hasSecondFrontpage === 'true'
       ? `${swipeBannerUrl}/Image.ashx?PageNumber=2&ImageType=Normal`
       : '';
   const backgroundColorTop: string = '#{BACKGROUNDCOLORTOP}';
   const backgroundColor: string = '#{BACKGROUNDCOLOR}';
   const mediaUrl: string = '${MEDIA_URL}';
-  const domainString: string = '#{DOMAIN}';
+  // const domainString: string = '#{DOMAIN}';
   const trackingPixel1: string = '#{TRACKINGURL1}';
   const trackingPixel2: string = '#{TRACKINGURL2}';
   const trackingPixel3: string = '#{TRACKINGURL3}';
 
-  let domainUrl: string = '';
-  if (domainString.indexOf('DOMAIN') === -1) {
-    switch (domainString) {
-      case 'JP':
-        domainUrl = 'https://jp.dk';
-        break;
-      case 'Politiken':
-        domainUrl = 'https://politiken.dk';
-        break;
-      case 'Ekstra Bladet':
-        domainUrl = 'https://ekstrabladet.dk';
-        break;
-    }
-  }
+  // let domainUrl: string = '';
+  // if (domainString.indexOf('DOMAIN') === -1) {
+  //   switch (domainString) {
+  //     case 'JP':
+  //       domainUrl = 'https://jp.dk';
+  //       break;
+  //     case 'Politiken':
+  //       domainUrl = 'https://politiken.dk';
+  //       break;
+  //     case 'Ekstra Bladet':
+  //       domainUrl = 'https://ekstrabladet.dk';
+  //       break;
+  //   }
+  // }
 
   const getUrlParameter = sParam => {
     if (window.location) {
@@ -56,9 +58,9 @@ export function bannerInFrame() {
     //   }
     // }
   };
-  const getEpaperURL = getUrlParameter('src');
-  const epaper_originurl =
-    getEpaperURL !== '' ? decodeURIComponent(getEpaperURL) : domainUrl;
+  // const getEpaperURL = getUrlParameter('src');
+  // const epaper_originurl =
+  //   getEpaperURL !== '' ? decodeURIComponent(getEpaperURL) : domainUrl;
 
   const urlqueorand = swipeBannerUrl.indexOf('?') !== -1 ? '&' : '?';
   const theTarget =
@@ -165,10 +167,12 @@ export function bannerInFrame() {
         body.appendChild(trackingImg3);
       }
 
-      window.parent.postMessage(
-        JSON.stringify(pass_epaperframe_data),
-        epaper_originurl
-      );
+      openOverlay(pass_epaperframe_data);
+
+      // window.parent.postMessage(
+      //   JSON.stringify(pass_epaperframe_data),
+      //   epaper_originurl
+      // );
       setTimeout(function() {
         location.replace(theTarget);
       }, 800);
