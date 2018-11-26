@@ -1,8 +1,8 @@
 import { bannerInFrame } from './bannerInFrame';
-import { bannerOnSite } from './bannerOnSite';
+import { initOverlay } from './bannerOnSite';
 
 window.addEventListener('load', () => {
   bannerInFrame();
-  bannerOnSite();
+  initOverlay();
   console.log('oooh ${CLICK_URL}');
 });
