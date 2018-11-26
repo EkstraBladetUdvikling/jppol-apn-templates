@@ -1,4 +1,4 @@
-const dimCloserButton = 55;
+const dimCloserButton = 80;
 export const styles = `html, body {
 	width: 100%;
 	height: 100%;
@@ -12,10 +12,10 @@ body, td, th {
 	background-color:#fff;
 }
 #epaper_eb_banner,
-#epaper_eb_banner_container,
+#epaperBannerContainer,
 #epaper_eb_banner_logo,
-#epaper_eb_banner_txt,
-#epaper_eb_banner_pointer {
+#epaperBannerTxt,
+#epaperBannerPointer {
 	position:absolute;
 	height: 100%;
 	width: 100%;
@@ -32,7 +32,7 @@ body, td, th {
 	background: linear-gradient(rgba(0,0,0,0.52), rgba(0,0,0,0.0));
 	overflow: hidden;
 }
-#epaper_eb_banner_container {}
+
 
 #epaper_eb_banner_logo {
 	-webkit-box-sizing: border-box;
@@ -47,7 +47,7 @@ body, td, th {
 	width:100%;
 	display:block;
 }
-#epaper_eb_banner_content {
+#epaperBannerContent {
 	position: absolute;
 	margin-top:51px;
 	display: flex;
@@ -56,27 +56,27 @@ body, td, th {
 	height: calc(100% - 51px);
 }
 
-.epaper_eb_banner_content_left, .epaper_eb_banner_content_right {
+.epaperBannerContent_left, .epaperBannerContent_right {
 	width: 40px;
 }
-.epaper_eb_banner_content_center {
+.epaperBannerContent_center {
 	height: 100%;
 }
-.epaper_eb_banner_content_right {}
-.epaper_eb_banner_content_right .lastpage_arrow {
+.epaperBannerContent_right {}
+.epaperBannerContent_right .lastpage_arrow {
 	font-size:40px;
 	font-weight:bold;
 	margin-top:20px;
 	color:#fff;
 }
-.epaper_eb_banner_content_right .nextpage_arrow {
+.epaperBannerContent_right .nextpage_arrow {
 	font-size:57px;
 	font-weight:bold;
 	margin-top: calc(50vh - 122px);
 	margin-left:-10px;
 	color:#fff;
 }
-.epaper_eb_banner_content_center img {
+.epaperBannerContent_center img {
 	position: relative;
 	height: 515px;
 	width: auto;
@@ -87,14 +87,14 @@ body, td, th {
 	-webkit-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.3);
 	box-shadow: 		3px 3px 5px 1px rgba(0,0,0,0.3);
 }
-.epaper_eb_banner_content_center img:nth-child(2) {
+.epaperBannerContent_center img:nth-child(2) {
 	-moz-box-shadow: 	4px 3px 5px 1px rgba(0,0,0,0.3);
 	-webkit-box-shadow: 4px 3px 5px 1px rgba(0,0,0,0.3);
 	box-shadow: 		4px 3px 5px 1px rgba(0,0,0,0.3);
 }
 
-#epaper_eb_banner_txt {}
-#epaper_eb_banner_pointer {
+#epaperBannerTxt {}
+#epaperBannerPointer {
 	width:30px;
 	height:30px;
 	overflow:visible;
@@ -105,7 +105,7 @@ body, td, th {
 	-webkit-transition: all 0.3s ease;
 	transition: all 0.3s ease;
 }
-#epaper_eb_banner_pointer svg {
+#epaperBannerPointer svg {
 	width:100%;
 	filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.35));
 }
@@ -115,7 +115,7 @@ body, td, th {
 .pointer_fill {
 	fill: url(#grad1);
 }
-#epaper_eb_banner_container:hover #epaper_eb_banner_pointer {
+#epaperBannerContainer:hover #epaperBannerPointer {
 	-webkit-transform: translate(200px,30px) scale(1) rotate(-32deg);
 	transform: translate(200px,30px) scale(1) rotate(-32deg);
 
@@ -157,14 +157,18 @@ body, td, th {
   width: 50px;
 }
 .closerButton {
+  align-items: center;
   background: rgb(0, 0, 0);
   border-radius: 50%;
+  box-sizing: border-box;
   color: #fff;
+  display: flex;
   height: ${dimCloserButton}px;
   fill: #fff;
   font-family: Arial;
   font-size: 27px;
   font-weight: bold;
+  justify-content: center;
   line-height: ${dimCloserButton}px;
   padding: 20px;
   text-transform: uppercase;

@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "outDir": "./tsbuilt",
+    "allowJs": true,
+    "target": "es5",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "indent": [true, "spaces", 2],
+  "include": ["./**/src/*.ts"]
+}
