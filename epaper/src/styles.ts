@@ -1,4 +1,4 @@
-const dimCloserButton = 80;
+const dimCloserButton = 84;
 export const styles = `html, body {
 	width: 100%;
 	height: 100%;
@@ -166,7 +166,7 @@ body, td, th {
   height: ${dimCloserButton}px;
   fill: #fff;
   font-family: Arial;
-  font-size: 27px;
+  font-size: 24px;
   font-weight: bold;
   justify-content: center;
   line-height: ${dimCloserButton}px;

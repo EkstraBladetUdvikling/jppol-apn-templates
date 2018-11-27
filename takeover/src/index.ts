@@ -35,4 +35,11 @@ const doTakeover = (() => {
   docFrag.appendChild(bannerContainer);
 
   document.body.appendChild(docFrag);
+  const parentDoc = window.parent.document;
+  const receiver = parentDoc.getElementById(document.body.id);
+  if (receiver === null) {
+    return;
+  }
+  const epaperIframe = receiver.querySelector('iframe');
+  epaperIframe.setAttribute('style', 'height: 100%;width: 100%;');
 })();

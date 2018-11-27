@@ -26,7 +26,6 @@ export function bannerInFrame() {
   const backgroundColorTop: string = '#{BACKGROUNDCOLORTOP}';
   const backgroundColor: string = '#{BACKGROUNDCOLOR}';
   const mediaUrl: string = '${MEDIA_URL}';
-  // const domainString: string = '#{DOMAIN}';
   const trackingPixel1: string = '#{TRACKINGURL1}';
   const trackingPixel2: string = '#{TRACKINGURL2}';
   const trackingPixel3: string = '#{TRACKINGURL3}';
