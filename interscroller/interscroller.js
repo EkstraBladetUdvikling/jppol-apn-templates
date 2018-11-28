@@ -11,7 +11,7 @@ var pixelUrl3 = ('#{PIXEL_URL3}' === defaultPixelUrl) ? '' : '#{PIXEL_URL3}';
 // create styles and divs
 var receiver = window.parent.document.getElementById(document.body.id) || window.document.getElementById('monster_6275018');
 if (receiver) {
-  receiver.setAttribute('style', 'width:100%;height:100vh;clip-path:polygon(0 0, 100% 0, 100% 100%, 0 100%);');
+  receiver.setAttribute('style', 'width:100%;height:100vh;clip-path:polygon(0 0, 100% 0, 100% 100%, 0 100%);-webkit-clip-path:polygon(0 0, 100% 0, 100% 100%, 0 100%)');
   receiver.parentElement.className += " interscrollerAd";
 }
 
