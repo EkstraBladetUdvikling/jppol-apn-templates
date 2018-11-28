@@ -7,21 +7,21 @@
 //     </div>
 // </div>
 const bannerOnSite = {
+  container: null,
   domainString: '',
-  epaper_iframe: null,
+  epaperIframe: null,
   parentBody: null,
-  parentNode: null,
-  receiver: null
+  parentSection: null
 };
 export function initOverlay() {
   bannerOnSite.domainString = '#{DOMAIN}';
   const parentDoc = window.parent.document;
   bannerOnSite.parentBody = parentDoc.body;
-  bannerOnSite.receiver = parentDoc.getElementById(document.body.id);
-  if (bannerOnSite.receiver === null) {
+  bannerOnSite.container = parentDoc.getElementById(document.body.id);
+  if (bannerOnSite.container === null) {
     return;
   }
-  bannerOnSite.epaper_iframe = bannerOnSite.receiver.querySelector('iframe');
+  bannerOnSite.epaperIframe = bannerOnSite.container.querySelector('iframe');
 }
 
 export function openOverlay() {
@@ -35,19 +35,18 @@ export function openOverlay() {
   padding: 20px;
   z-index: ${9999 * 9999};
   `;
-  bannerOnSite.receiver.setAttribute('style', containerStyling);
+  bannerOnSite.container.setAttribute('style', containerStyling);
   const iframeStyling = `
   height: 100%;
   width: 100%;
   `;
-  bannerOnSite.epaper_iframe.setAttribute('style', iframeStyling);
+  bannerOnSite.epaperIframe.setAttribute('style', iframeStyling);
   if (
-    bannerOnSite.parentNode === null &&
+    bannerOnSite.parentSection === null &&
     bannerOnSite.domainString.toLowerCase() === 'politiken'
   ) {
-    let parent = bannerOnSite.receiver.parentNode;
+    let parent = bannerOnSite.container.parentSection;
     while (parent) {
-      console.log('bannerOnSite', parent.nodeName);
       if (parent.nodeName === 'body') {
         break;
       }
@@ -55,28 +54,27 @@ export function openOverlay() {
         parent.nodeName === 'SECTION' &&
         parent.classList.contains('container')
       ) {
-        bannerOnSite.parentNode = parent;
+        bannerOnSite.parentSection = parent;
         break;
       } else {
-        parent = parent.parentNode;
+        parent = parent.parentSection;
       }
     }
   }
-  console.log('bannerOnSite ', bannerOnSite.parentNode);
-  if (bannerOnSite.parentNode !== null) {
-    bannerOnSite.parentNode.style.position = 'static';
+
+  if (bannerOnSite.parentSection !== null) {
+    bannerOnSite.parentSection.style.position = 'static';
   }
   bannerOnSite.parentBody.style.overflow = 'hidden';
 }
 
 export function closeOverlay() {
   const containerStyling = '';
-  bannerOnSite.receiver.setAttribute('style', containerStyling);
+  bannerOnSite.container.setAttribute('style', containerStyling);
   const iframeStyling = '';
-  bannerOnSite.epaper_iframe.setAttribute('style', iframeStyling);
-  if (bannerOnSite.parentNode !== null) {
-    bannerOnSite.parentNode.style.position = 'relative';
+  bannerOnSite.epaperIframe.setAttribute('style', iframeStyling);
+  if (bannerOnSite.parentSection !== null) {
+    bannerOnSite.parentSection.style.position = 'relative';
   }
   bannerOnSite.parentBody.style.overflow = '';
-  // fullScreenContainer
 }

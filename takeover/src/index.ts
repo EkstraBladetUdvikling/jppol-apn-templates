@@ -36,10 +36,10 @@ const doTakeover = (() => {
 
   document.body.appendChild(docFrag);
   const parentDoc = window.parent.document;
-  const receiver = parentDoc.getElementById(document.body.id);
-  if (receiver === null) {
+  const container = parentDoc.getElementById(document.body.id);
+  if (container === null) {
     return;
   }
-  const epaperIframe = receiver.querySelector('iframe');
+  const epaperIframe = container.querySelector('iframe');
   epaperIframe.setAttribute('style', 'height: 100%;width: 100%;');
 })();

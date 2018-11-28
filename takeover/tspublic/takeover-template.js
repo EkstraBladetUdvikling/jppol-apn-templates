@@ -17,11 +17,11 @@
       docFrag.appendChild(bannerContainer);
       document.body.appendChild(docFrag);
       var parentDoc = window.parent.document;
-      var receiver = parentDoc.getElementById(document.body.id);
-      if (receiver === null) {
+      var container = parentDoc.getElementById(document.body.id);
+      if (container === null) {
           return;
       }
-      var epaperIframe = receiver.querySelector('iframe');
+      var epaperIframe = container.querySelector('iframe');
       epaperIframe.setAttribute('style', 'height: 100%;width: 100%;');
   })();
 
