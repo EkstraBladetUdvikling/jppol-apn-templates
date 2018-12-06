@@ -1,0 +1,55 @@
+(function () {
+	'use strict';
+
+	var mediaUrl = '${MEDIA_URL}';
+	var clickUrl = '${CLICK_URL}';
+	var wallpaper = '#{WALLPAPER}';
+	var wpClickthrough = '#{WPCLICKTHROUGH}';
+	var wpTracker = '#{WPTRACKER}';
+	var wpPixel = '#{WPPIXELTRACK}';
+
+console.log(mediaUrl);
+console.log(clickUrl);
+console.log(wallpaper);
+console.log(wpClickthrough);
+console.log(wpTracker);
+console.log(wpPixel);
+
+document.write('<a href="${CLICK_URL}" target="_blank"><img width="${CREATIVE_WIDTH}" height="${CREATIVE_HEIGHT}" style="border-style: none" src="${MEDIA_URL}"/></a>');
+
+	var el = window.top.document.getElementById('wallpaperBackground');
+	el.style.cursor = 'pointer';
+	el.style.display = 'block';
+	el.style.backgroundColor = 'transparent';
+	el.style.backgroundImage = 'url(' + wallpaper + ')';
+	el.style.backgroundRepeat =  'no-repeat';
+	el.style.backgroundPosition = 'center top';
+	el.style.backgroundAttachment = 'scroll';
+	el.style.zIndex = '0 !important';
+
+	if (wpClickthrough) {
+		window.wallpaperClick = function (ev, id, click) {
+			if (ev = ev || window.top.event) {
+				var targetElement = ev.target || ev.srcElement;
+				if (targetElement === window.top.document.body || ~targetElement.className.indexOf(id) || ~targetElement.id.indexOf(id)) {
+					window.top.open(click);
+				}
+			}
+		}
+
+		if (el.addEventListener) {
+			el.addEventListener('click', function (e) {
+				window.wallpaperClick(e, 'wallpaperBackground', wpClickthrough);
+			}, false);
+		} else if (el.attachEvent) {
+			el.attachEvent('onclick', function (e) {
+				window.wallpaperClick(e, 'wallpaperBackground', wpClickthrough);
+			});
+		}
+	}
+
+	if (wpPixel) {
+		var img = new Image();
+		img.src = '' + wpPixel;
+	}
+}());
