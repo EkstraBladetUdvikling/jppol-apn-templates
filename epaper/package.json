@@ -15,7 +15,7 @@
   "scripts": {
     "build": "yarn rollup && yarn uglify",
     "rollup": "rollup -c",
-    "uglify": "uglifyjs \"./tspublic/epaper-template.js\" -o \"./output/epaper-template.min.js\" -c drop_console=true -m",
+    "uglify": "uglifyjs \"./index.js\" \"./tspublic/epaper-template.js\" -o \"./output/epaper-template.min.js\" -c drop_console=true -m",
     "lint": "tslint -c tslint.json \"./src/**/*.ts\""
   }
 }

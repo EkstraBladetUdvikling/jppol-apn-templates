@@ -67,32 +67,20 @@
   var dimCloserButton = 84;
   var styles = "html, body {\n\twidth: 100%;\n\theight: 100%;\n}\nbody, td, th {\n\tfont-family: Tahoma, Geneva, sans-serif;\n\tfont-size: 14px;\n\tcolor: #333;\n\tline-height: 21px;\n\n\tbackground-color:#fff;\n}\n#epaper_eb_banner,\n#epaperBannerContainer,\n#epaper_eb_banner_logo,\n#epaperBannerTxt,\n#epaperBannerPointer {\n\tposition:absolute;\n\theight: 100%;\n\twidth: 100%;\n\tcursor: pointer;\n\tbackground-repeat: no-repeat;\n\tbackground-position: center center;\n\tbackground-size:contain;\n}\n#epaper_eb_banner {\n\t/*background-color:#fff;*/\n\n\tbackground: -webkit-linear-gradient(rgba(0,0,0,0.52), rgba(0,0,0,0.0));\n\tbackground: -ms-linear-gradient(rgba(0,0,0,0.52), rgba(0,0,0,0.0));\n\tbackground: linear-gradient(rgba(0,0,0,0.52), rgba(0,0,0,0.0));\n\toverflow: hidden;\n}\n\n\n#epaper_eb_banner_logo {\n\t-webkit-box-sizing: border-box;\n\t-moz-box-sizing: border-box;\n\tbox-sizing: border-box;\n\theight:51px;\n\twidth:100%;\n\tpadding:10px;\n}\n#epaper_eb_banner_logo > div {\n\theight:100%;\n\twidth:100%;\n\tdisplay:block;\n}\n#epaperBannerContent {\n\tposition: absolute;\n\tmargin-top:51px;\n\tdisplay: flex;\n\tjustify-content: center;\n\twidth: 100%;\n\theight: calc(100% - 51px);\n}\n\n.epaperBannerContent_left, .epaperBannerContent_right {\n\twidth: 40px;\n}\n.epaperBannerContent_center {\n\theight: 100%;\n}\n.epaperBannerContent_right {}\n.epaperBannerContent_right .lastpage_arrow {\n\tfont-size:40px;\n\tfont-weight:bold;\n\tmargin-top:20px;\n\tcolor:#fff;\n}\n.epaperBannerContent_right .nextpage_arrow {\n\tfont-size:57px;\n\tfont-weight:bold;\n\tmargin-top: calc(50vh - 122px);\n\tmargin-left:-10px;\n\tcolor:#fff;\n}\n.epaperBannerContent_center img {\n\tposition: relative;\n\theight: 515px;\n\twidth: auto;\n\ttop:50%;\n\ttransform:translateY(-50%);\n\n\t-moz-box-shadow: \t3px 3px 5px 1px rgba(0,0,0,0.3);\n\t-webkit-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.3);\n\tbox-shadow: \t\t3px 3px 5px 1px rgba(0,0,0,0.3);\n}\n.epaperBannerContent_center img:nth-child(2) {\n\t-moz-box-shadow: \t4px 3px 5px 1px rgba(0,0,0,0.3);\n\t-webkit-box-shadow: 4px 3px 5px 1px rgba(0,0,0,0.3);\n\tbox-shadow: \t\t4px 3px 5px 1px rgba(0,0,0,0.3);\n}\n\n#epaperBannerTxt {}\n#epaperBannerPointer {\n\twidth:30px;\n\theight:30px;\n\toverflow:visible;\n\tleft:50%;\n\ttop:50%;\n\t-webkit-transform: translate(203px,34px) scale(1.1) rotate(-27deg);\n\ttransform: translate(203px,34px) scale(1.1) rotate(-27deg);\n\t-webkit-transition: all 0.3s ease;\n\ttransition: all 0.3s ease;\n}\n#epaperBannerPointer svg {\n\twidth:100%;\n\tfilter: drop-shadow(0px 3px 3px rgba(0,0,0,0.35));\n}\n.pointer_stroke {\n\tfill: #000;\n}\n.pointer_fill {\n\tfill: url(#grad1);\n}\n#epaperBannerContainer:hover #epaperBannerPointer {\n\t-webkit-transform: translate(200px,30px) scale(1) rotate(-32deg);\n\ttransform: translate(200px,30px) scale(1) rotate(-32deg);\n\n}\n.moveL {\n\t-webkit-animation: moveLeft 3s ease-out 1;\n\tanimation: moveLeft 3s ease-out 1;\n}\n.moveR {\n\t-webkit-animation: moveRight 3s ease-out 1;\n\tanimation: moveRight 3s ease-out 1;\n}\n@-webkit-keyframes moveRight {\n\t0% {-webkit-transform: translateX(0%);}\n\t10% {-webkit-transform: translateX(100%);}\n\t100% {-webkit-transform: translateX(100%);}\n}\n@keyframes moveRight {\n\t0% {transform: translateX(0%);}\n\t10% {transform: translateX(100%);}\n\t100% {transform: translateX(100%);}\n}\n@-webkit-keyframes moveLeft {\n\t0% {-webkit-transform: translateX(0%);}\n\t10% {-webkit-transform: translateX(-100%);}\n\t100% {-webkit-transform: translateX(-100%);}\n}\n@keyframes moveLeft {\n\t0% {transform: translateX(0%);}\n\t10% {transform: translateX(-100%);}\n\t100% {transform: translateX(-100%);}\n}\n.reopenerSvg {\n  height: 44px;\n  width: 44px;\n}\n.reopenerSvg:hover {\n  height: 50px;\n  width: 50px;\n}\n.closerButton {\n  align-items: center;\n  background: rgb(0, 0, 0);\n  border-radius: 50%;\n  box-sizing: border-box;\n  color: #fff;\n  display: flex;\n  height: " + dimCloserButton + "px;\n  fill: #fff;\n  font-family: Arial;\n  font-size: 24px;\n  font-weight: bold;\n  justify-content: center;\n  line-height: " + dimCloserButton + "px;\n  padding: 20px;\n  text-transform: uppercase;\n  width: " + dimCloserButton + "px;\n  position: absolute;\n  right: 10px;\n  bottom: 10px;\n}\n.fullScreenIframe {\n  border: 0;\n  height: 100%;\n  width: 100%;\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n}";
 
-  // <div id="epaper_eb_banner"><div id="epaperBannerContainer"><div id="epaper_eb_banner_logo"><div></div></div><div id="epaperBannerContent"><div class="epaperBannerContent_left"></div>
-  //                             <div id="epaper_eb_cover" class="epaperBannerContent_center">
-  //                             <img src="https://viewer.ipaper.io/ekstra-bladet/scandinavian-park/scansonderprospekt//Image.ashx?PageNumber=1&amp;ImageType=Normal"><img src="https://viewer.ipaper.io/ekstra-bladet/scandinavian-park/scansonderprospekt//Image.ashx?PageNumber=2&amp;ImageType=Normal">
-  //                             </div>
-  //                             <div class="epaperBannerContent_right">
-  //                               <i class="material-icons lastpage_arrow">last_page</i>
-  //                               <i class="material-icons nextpage_arrow">chevron_right</i>
-  //                             </div></div><div id="epaperBannerTxt"></div><div id="epaperBannerPointer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 23">
-  //                 <path class="pointer_stroke" d="M6 0h2v1H6V0zM0 8v3h1V9h2V8H0zM1 11h1v1H1V11zM3 9h1v1H3V9zM16 8h1v1h-1V8zM2 12h1v2H2V12zM3 14h1v2H3V14zM4 16h1v3H4V16zM16 17h1v3h-1V17zM12 7h2V6h-3v4h1V7zM14 7v4h1V8h1V7H14zM16 23v-3h-1v2H6v-3H5v4H16zM4 10v1h1v4h1V1H5v9H4zM9 6h2V5H9V1H8v9h1V6zM17 9h1v8h-1V9z"></path>
-  //                 <polygon class="pointer_fill" points="6 1 6 15 5 15 5 11 4 11 4 10 3 10 3 9 1 9 1 11 2 11 2 12 3 12 3 14 4 14 4 16 5 16 5 19 6 19 6 22 15 22 15 20 16 20 16 17 17 17 17 9 16 9 16 8 15 8 15 11 14 11 14 7 12 7 12 10 11 10 11 6 9 6 9 10 8 10 8 1 "></polygon>
-  //                 <defs><linearGradient id="grad1" x1="65%" y1="20%" x2="45%" y2="90%"><stop offset="0%" style="stop-color:rgb(255,255,255); stop-opacity:1"></stop><stop offset="100%" style="stop-color:rgb(215,215,215); stop-opacity:1"></stop></linearGradient></defs>
-  //                 </svg></div></div></div>
   function bannerInFrame() {
-      var swipeBannerUrl = '#{SWIPEBANNERURL}';
-      var swipeBannerUrlFrontpage = swipeBannerUrl + "/Image.ashx?PageNumber=1&ImageType=Normal";
-      var hasSecondFrontpage = '#{SECONDFRONTPAGE}';
-      var swipeBannerUrlFrontpage2 = hasSecondFrontpage.indexOf('SECONDFRONTPAGE') === -1 &&
-          hasSecondFrontpage === 'true'
+      var options = window.apnOptions;
+      var swipeBannerUrl = options.swipeBannerUrl;
+      var swipeBannerUrlFrontpage = options.swipeBannerUrl;
+      var hasSecondFrontpage = options.hasSecondFrontpage;
+      var swipeBannerUrlFrontpage2 = hasSecondFrontpage === 'true'
           ? swipeBannerUrl + "/Image.ashx?PageNumber=2&ImageType=Normal"
           : '';
-      var backgroundColorTop = '#{BACKGROUNDCOLORTOP}';
-      var backgroundColor = '#{BACKGROUNDCOLOR}';
-      var mediaUrl = '${MEDIA_URL}';
-      var trackingPixel1 = '#{TRACKINGURL1}';
-      var trackingPixel2 = '#{TRACKINGURL2}';
-      var trackingPixel3 = '#{TRACKINGURL3}';
+      var backgroundColorTop = options.backgroundColorTop;
+      var backgroundColor = options.backgroundColor;
+      var mediaUrl = options.mediaUrl;
+      var trackingPixel1 = options.trackingPixel1;
+      var trackingPixel2 = options.trackingPixel2;
+      var trackingPixel3 = options.trackingPixel3;
       var urlqueorand = swipeBannerUrl.indexOf('?') !== -1 ? '&' : '?';
       var theTarget = swipeBannerUrl +
           urlqueorand +

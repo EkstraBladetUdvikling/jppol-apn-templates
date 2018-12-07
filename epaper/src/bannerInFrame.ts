@@ -14,21 +14,27 @@ import { styles } from './styles';
 //                 <defs><linearGradient id="grad1" x1="65%" y1="20%" x2="45%" y2="90%"><stop offset="0%" style="stop-color:rgb(255,255,255); stop-opacity:1"></stop><stop offset="100%" style="stop-color:rgb(215,215,215); stop-opacity:1"></stop></linearGradient></defs>
 //                 </svg></div></div></div>
 
+declare global {
+  interface Window {
+    apnOptions: any;
+  }
+}
+
 export function bannerInFrame() {
-  const swipeBannerUrl: string = '#{SWIPEBANNERURL}';
-  const swipeBannerUrlFrontpage: string = `${swipeBannerUrl}/Image.ashx?PageNumber=1&ImageType=Normal`;
-  const hasSecondFrontpage: string = '#{SECONDFRONTPAGE}';
+  const options = window.apnOptions;
+  const swipeBannerUrl: string = options.swipeBannerUrl;
+  const swipeBannerUrlFrontpage: string = options.swipeBannerUrl;
+  const hasSecondFrontpage: string = options.hasSecondFrontpage;
   const swipeBannerUrlFrontpage2: string =
-    hasSecondFrontpage.indexOf('SECONDFRONTPAGE') === -1 &&
     hasSecondFrontpage === 'true'
       ? `${swipeBannerUrl}/Image.ashx?PageNumber=2&ImageType=Normal`
       : '';
-  const backgroundColorTop: string = '#{BACKGROUNDCOLORTOP}';
-  const backgroundColor: string = '#{BACKGROUNDCOLOR}';
-  const mediaUrl: string = '${MEDIA_URL}';
-  const trackingPixel1: string = '#{TRACKINGURL1}';
-  const trackingPixel2: string = '#{TRACKINGURL2}';
-  const trackingPixel3: string = '#{TRACKINGURL3}';
+  const backgroundColorTop: string = options.backgroundColorTop;
+  const backgroundColor: string = options.backgroundColor;
+  const mediaUrl: string = options.mediaUrl;
+  const trackingPixel1: string = options.trackingPixel1;
+  const trackingPixel2: string = options.trackingPixel2;
+  const trackingPixel3: string = options.trackingPixel3;
 
   const urlqueorand = swipeBannerUrl.indexOf('?') !== -1 ? '&' : '?';
   const theTarget =
