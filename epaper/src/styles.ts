@@ -92,7 +92,6 @@ body, td, th {
 	-webkit-box-shadow: 4px 3px 5px 1px rgba(0,0,0,0.3);
 	box-shadow: 		4px 3px 5px 1px rgba(0,0,0,0.3);
 }
-
 #epaperBannerTxt {}
 #epaperBannerPointer {
 	width:30px;
@@ -186,4 +185,18 @@ body, td, th {
   right: 0;
   bottom: 0;
   left: 0;
+}
+@media only screen and (max-width : 640px) {
+  .epaperBannerContent_center {
+    text-align: center;
+  }
+  .epaperBannerContent_center img {
+    height: auto;
+    width: 50%;
+    top: auto;
+    transform: none;
+  }
+  .epaperBannerContent_left, .epaperBannerContent_right {
+    display: none;
+  }
 }`;
