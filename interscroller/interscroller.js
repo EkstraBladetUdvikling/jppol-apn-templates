@@ -9,14 +9,20 @@ var pixelUrl2 = ('#{PIXEL_URL2}' === defaultPixelUrl) ? '' : '#{PIXEL_URL2}';
 var pixelUrl3 = ('#{PIXEL_URL3}' === defaultPixelUrl) ? '' : '#{PIXEL_URL3}';
 
 // create styles and divs
-var receiver = window.parent.document.getElementById(document.body.id) || window.document.getElementById('monster_6275018');
+var receiver = window.parent.document.getElementById(document.body.id);
 if (receiver) {
-  receiver.setAttribute('style', 'width:100%;height:100vh;clip-path:polygon(0 0, 100% 0, 100% 100%, 0 100%);-webkit-clip-path:polygon(0 0, 100% 0, 100% 100%, 0 100%)');
   receiver.parentElement.className += " interscrollerAd";
-}
 
-var iframe = receiver.getElementsByTagName('iframe')[0];
-iframe ? iframe.setAttribute('style', 'position:fixed;width:100%;height:100vh;top:0;left:0;vertical-align:initial;border:0;') : null;
+  //receiver.setAttribute('style', 'position:relative;width:100%;height:100vh;');
+  receiver.setAttribute('style', 'position:absolute;top:0;left:0;width:100%;height:100vh;clip:rect(auto, auto, auto, auto);z-index:1');
+
+  // this style gets overwritten with "display: inline", for some reason
+  //var childDiv = receiver.getElementsByTagName('div');
+  //childDiv ? childDiv[0].setAttribute('style', 'position:absolute;top:0;left:0;width:100%;height:100vh;clip:rect(auto, auto, auto, auto);') : null;
+
+  var iframe = receiver.getElementsByTagName('iframe');
+  iframe ? iframe[0].setAttribute('style', 'position:fixed;width:100%;height:100vh;top:0;left:0;vertical-align:initial;border:0;') : null;
+}
 
 var imageDiv = document.createElement('div')
 imageDiv.setAttribute('style', 'position:fixed;width:100%;height:100vh;top:0;left:0;vertical-align:initial;background-image:url("' + mediaUrl + '");background-size:cover;background-repeat:no-repeat;background-position:center center;transform:translateZ(0px);cursor:pointer;');
