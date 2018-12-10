@@ -1,19 +1,6 @@
 import { closeOverlay, openOverlay } from './bannerOnSite';
 import { styles } from './styles';
 
-// <div id="epaper_eb_banner"><div id="epaperBannerContainer"><div id="epaper_eb_banner_logo"><div></div></div><div id="epaperBannerContent"><div class="epaperBannerContent_left"></div>
-//                             <div id="epaper_eb_cover" class="epaperBannerContent_center">
-//                             <img src="https://viewer.ipaper.io/ekstra-bladet/scandinavian-park/scansonderprospekt//Image.ashx?PageNumber=1&amp;ImageType=Normal"><img src="https://viewer.ipaper.io/ekstra-bladet/scandinavian-park/scansonderprospekt//Image.ashx?PageNumber=2&amp;ImageType=Normal">
-//                             </div>
-//                             <div class="epaperBannerContent_right">
-//                               <i class="material-icons lastpage_arrow">last_page</i>
-//                               <i class="material-icons nextpage_arrow">chevron_right</i>
-//                             </div></div><div id="epaperBannerTxt"></div><div id="epaperBannerPointer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 23">
-//                 <path class="pointer_stroke" d="M6 0h2v1H6V0zM0 8v3h1V9h2V8H0zM1 11h1v1H1V11zM3 9h1v1H3V9zM16 8h1v1h-1V8zM2 12h1v2H2V12zM3 14h1v2H3V14zM4 16h1v3H4V16zM16 17h1v3h-1V17zM12 7h2V6h-3v4h1V7zM14 7v4h1V8h1V7H14zM16 23v-3h-1v2H6v-3H5v4H16zM4 10v1h1v4h1V1H5v9H4zM9 6h2V5H9V1H8v9h1V6zM17 9h1v8h-1V9z"></path>
-//                 <polygon class="pointer_fill" points="6 1 6 15 5 15 5 11 4 11 4 10 3 10 3 9 1 9 1 11 2 11 2 12 3 12 3 14 4 14 4 16 5 16 5 19 6 19 6 22 15 22 15 20 16 20 16 17 17 17 17 9 16 9 16 8 15 8 15 11 14 11 14 7 12 7 12 10 11 10 11 6 9 6 9 10 8 10 8 1 "></polygon>
-//                 <defs><linearGradient id="grad1" x1="65%" y1="20%" x2="45%" y2="90%"><stop offset="0%" style="stop-color:rgb(255,255,255); stop-opacity:1"></stop><stop offset="100%" style="stop-color:rgb(215,215,215); stop-opacity:1"></stop></linearGradient></defs>
-//                 </svg></div></div></div>
-
 declare global {
   interface Window {
     apnOptions: any;
