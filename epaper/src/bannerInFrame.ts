@@ -23,12 +23,7 @@ declare global {
 export function bannerInFrame() {
   const options = window.apnOptions;
   const swipeBannerUrl: string = options.swipeBannerUrl;
-  const swipeBannerUrlFrontpage: string = options.swipeBannerUrl;
   const hasSecondFrontpage: string = options.hasSecondFrontpage;
-  const swipeBannerUrlFrontpage2: string =
-    hasSecondFrontpage === 'true'
-      ? `${swipeBannerUrl}/Image.ashx?PageNumber=2&ImageType=Normal`
-      : '';
   const backgroundColorTop: string = options.backgroundColorTop;
   const backgroundColor: string = options.backgroundColor;
   const mediaUrl: string = options.mediaUrl;
@@ -52,13 +47,12 @@ export function bannerInFrame() {
   epaperBannerContainer.innerHTML = htmlString;
   const epaperBannerContent = document.createElement('div');
   epaperBannerContent.id = 'epaperBannerContent';
-  const frontPage = `<img src='${swipeBannerUrlFrontpage}' />`;
+  const frontPage = `<img src='${swipeBannerUrl}Image.ashx?PageNumber=1&ImageType=Normal' />`;
   const frontPage2 =
-    swipeBannerUrlFrontpage2 !== ''
-      ? `<img src='${swipeBannerUrlFrontpage2}' />`
+    hasSecondFrontpage === 'true'
+      ? `<img src='${swipeBannerUrl}/Image.ashx?PageNumber=2&ImageType=Normal' />`
       : '';
-  const content = `
-                  <div class="epaperBannerContent_left"></div>
+  const content = `<div class="epaperBannerContent_left"></div>
                     <div id="epaper_eb_cover" class="epaperBannerContent_center">
                     ${frontPage}${frontPage2}
                     </div>

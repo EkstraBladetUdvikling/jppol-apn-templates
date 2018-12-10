@@ -70,11 +70,7 @@
   function bannerInFrame() {
       var options = window.apnOptions;
       var swipeBannerUrl = options.swipeBannerUrl;
-      var swipeBannerUrlFrontpage = options.swipeBannerUrl;
       var hasSecondFrontpage = options.hasSecondFrontpage;
-      var swipeBannerUrlFrontpage2 = hasSecondFrontpage === 'true'
-          ? swipeBannerUrl + "/Image.ashx?PageNumber=2&ImageType=Normal"
-          : '';
       var backgroundColorTop = options.backgroundColorTop;
       var backgroundColor = options.backgroundColor;
       var mediaUrl = options.mediaUrl;
@@ -95,11 +91,11 @@
       epaperBannerContainer.innerHTML = htmlString;
       var epaperBannerContent = document.createElement('div');
       epaperBannerContent.id = 'epaperBannerContent';
-      var frontPage = "<img src='" + swipeBannerUrlFrontpage + "' />";
-      var frontPage2 = swipeBannerUrlFrontpage2 !== ''
-          ? "<img src='" + swipeBannerUrlFrontpage2 + "' />"
+      var frontPage = "<img src='" + swipeBannerUrl + "Image.ashx?PageNumber=1&ImageType=Normal' />";
+      var frontPage2 = hasSecondFrontpage === 'true'
+          ? "<img src='" + swipeBannerUrl + "/Image.ashx?PageNumber=2&ImageType=Normal' />"
           : '';
-      var content = "\n                  <div class=\"epaperBannerContent_left\"></div>\n                    <div id=\"epaper_eb_cover\" class=\"epaperBannerContent_center\">\n                    " + frontPage + frontPage2 + "\n                    </div>\n                    <div class=\"epaperBannerContent_right\">\n                      <i class=\"material-icons lastpage_arrow\">last_page</i>\n                      <i class=\"material-icons nextpage_arrow\">chevron_right</i>\n                    </div>";
+      var content = "<div class=\"epaperBannerContent_left\"></div>\n                    <div id=\"epaper_eb_cover\" class=\"epaperBannerContent_center\">\n                    " + frontPage + frontPage2 + "\n                    </div>\n                    <div class=\"epaperBannerContent_right\">\n                      <i class=\"material-icons lastpage_arrow\">last_page</i>\n                      <i class=\"material-icons nextpage_arrow\">chevron_right</i>\n                    </div>";
       epaperBannerContent.innerHTML = content;
       epaperBannerContainer.appendChild(epaperBannerContent);
       var epaperBannerTxt = document.createElement('div');
