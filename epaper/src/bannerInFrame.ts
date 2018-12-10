@@ -98,13 +98,6 @@ export function bannerInFrame() {
   /**
    * Set up Event listeners
    */
-  // $("#epaperBannerContainer").on("swipeleft", function() {
-  //   openAdLayer("moveL");
-  // });
-  // $("#epaperBannerContainer").on("swiperight", function() {
-  //   openAdLayer("moveR");
-  // });
-
   epaperBannerContainer.addEventListener('click', () => {
     openAdLayer('moveL');
   });
