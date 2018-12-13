@@ -94,13 +94,14 @@ body, td, th {
 }
 #epaperBannerTxt {}
 #epaperBannerPointer {
+  display: none;
 	width:30px;
 	height:30px;
 	overflow:visible;
 	left:50%;
 	top:50%;
-	-webkit-transform: translate(203px,34px) scale(1.1) rotate(-27deg);
-	transform: translate(203px,34px) scale(1.1) rotate(-27deg);
+	-webkit-transform: translate(50px,34px) scale(1.1) rotate(-27deg);
+	transform: translate(50px,34px) scale(1.1) rotate(-27deg);
 	-webkit-transition: all 0.3s ease;
 	transition: all 0.3s ease;
 }
@@ -113,11 +114,6 @@ body, td, th {
 }
 .pointer_fill {
 	fill: url(#grad1);
-}
-#epaperBannerContainer:hover #epaperBannerPointer {
-	-webkit-transform: translate(200px,30px) scale(1) rotate(-32deg);
-	transform: translate(200px,30px) scale(1) rotate(-32deg);
-
 }
 .moveL {
 	-webkit-animation: moveLeft 3s ease-out 1;
@@ -198,5 +194,8 @@ body, td, th {
   }
   .epaperBannerContent_left, .epaperBannerContent_right {
     display: none;
+  }
+  #epaperBannerPointer {
+    display: block;
   }
 }`;
