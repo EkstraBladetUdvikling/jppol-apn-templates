@@ -1,7 +1,5 @@
 window.apnOptions = {
   swipeBannerUrl: '#{SWIPEBANNERURL}',
-  swipeBannerUrlFrontpage:
-    '${swipeBannerUrl}/Image.ashx?PageNumber=1&ImageType=Normal',
   hasSecondFrontpage: '#{SECONDFRONTPAGE}',
   backgroundColorTop: '#{BACKGROUNDCOLORTOP}',
   backgroundColor: '#{BACKGROUNDCOLOR}',
