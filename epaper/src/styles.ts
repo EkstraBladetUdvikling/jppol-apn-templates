@@ -76,7 +76,7 @@ body, td, th {
 	margin-left:-10px;
 	color:#fff;
 }
-.epaperBannerContent_center img {
+.frontpage {
 	position: relative;
 	height: 515px;
 	width: auto;
@@ -87,7 +87,7 @@ body, td, th {
 	-webkit-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.3);
 	box-shadow: 		3px 3px 5px 1px rgba(0,0,0,0.3);
 }
-.epaperBannerContent_center img:nth-child(2) {
+.frontpage2 {
 	-moz-box-shadow: 	4px 3px 5px 1px rgba(0,0,0,0.3);
 	-webkit-box-shadow: 4px 3px 5px 1px rgba(0,0,0,0.3);
 	box-shadow: 		4px 3px 5px 1px rgba(0,0,0,0.3);
@@ -100,10 +100,6 @@ body, td, th {
 	overflow:visible;
 	left:50%;
 	top:50%;
-	-webkit-transform: translate(50px,34px) scale(1.1) rotate(-27deg);
-	transform: translate(50px,34px) scale(1.1) rotate(-27deg);
-	-webkit-transition: all 0.3s ease;
-	transition: all 0.3s ease;
 }
 #epaperBannerPointer svg {
 	width:100%;
@@ -182,20 +178,61 @@ body, td, th {
   bottom: 0;
   left: 0;
 }
+@keyframes movePointer {
+  0% { transform: translateX(0px) rotate(0deg); }
+  60% { transform: translateX(0px) rotate(0deg); }
+  70% { transform: translateX(15px) rotate(15deg); }
+  85% { transform: translateX(0px) rotate(0deg); }
+  100% { transform: translateX(0px) rotate(0deg); }
+}
 @media only screen and (max-width : 640px) {
   .epaperBannerContent_center {
     text-align: center;
   }
-  .epaperBannerContent_center img {
-    height: auto;
-    width: 50%;
-    top: auto;
-    transform: none;
-  }
-  .epaperBannerContent_left, .epaperBannerContent_right {
-    display: none;
-  }
   #epaperBannerPointer {
     display: block;
+    width: 72px;
+    height: 72px;
+    overflow: visible;
+    left: 25%;
+    top: 60%;
+    -webkit-animation: movePointer 3s linear infinite;
+    animation: movePointer 3s linear infinite;
+  }
+  .frontpage {
+    height: 250px;
+  }
+  .opslag {
+    height: auto;
+    width: 120px;
+  }
+  #epaperBannerTxt {
+    position:relative;
+    display:block;
+    left: 82px;
+    top: 170px;
+    color:#fff;
+    background-color:rgba(0,0,0,0.3);
+    width: 148px;
+    height: 48px;
+    border:4px solid;
+    -moz-border-radius: 28px;
+    -webkit-border-radius: 28px;
+    -khtml-border-radius: 28px;
+    border-radius: 28px;
+  }
+  #epaperBannerTxt:after {
+    content:"";
+    position:absolute;
+    background-color:#fff;
+    width: 40px;
+    height: 40px;
+    margin-left:4px;
+    margin-top:4px;
+
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -khtml-border-radius: 50%;
+    border-radius: 50%;
   }
 }`;

@@ -5,12 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+  .has-content .eb-placement {
+    width: 100%;
+  }
+  .eb-placement {
+      display: -webkit-flex;
+      display: flex;
+      -webkit-justify-content: center;
+      justify-content: center;
+      overflow: hidden;
+  }
+
+  .eb-placement {
+      background: #e5e5e5;
+      color: #000;
+      line-height: 0;
+      text-align: center;
+      width: 100%;
+  }
+  </style>
 </head>
 <body>
-
-  <iframe id="apnTest" height="600px" width="930px" tabindex="-1" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border: 0px;"></iframe>
-
-
+  <div id="apnTester" class="eb-placement">
+    <div>
+      <iframe src="./template.html" id="apnTest" height="320px" width="320px" tabindex="-1" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border: 0px;"></iframe>
+    </div>
+  </div>
   <script>
     var doc = document.getElementById('apnTest').contentWindow.document;
     var body = doc.body;

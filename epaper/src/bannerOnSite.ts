@@ -25,6 +25,10 @@ export function initOverlay() {
 }
 
 export function openOverlay() {
+  let containerPadding = '0';
+  if (window.innerWidth > 640) {
+    containerPadding = '20px';
+  }
   const containerStyling = `
   background: rgba( 0, 0, 0, .8);
   position: fixed;
@@ -32,7 +36,7 @@ export function openOverlay() {
   right: 0;
   bottom: 0;
   left: 0;
-  padding: 20px;
+  padding: ${containerPadding};
   z-index: ${9999 * 9999};
   `;
   bannerOnSite.container.setAttribute('style', containerStyling);
@@ -41,6 +45,7 @@ export function openOverlay() {
   width: 100%;
   `;
   bannerOnSite.epaperIframe.setAttribute('style', iframeStyling);
+  bannerOnSite.epaperIframe.parentNode.setAttribute('style', iframeStyling);
   if (
     bannerOnSite.parentSection === null &&
     bannerOnSite.domainString.toLowerCase() === 'politiken'
