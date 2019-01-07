@@ -13,12 +13,7 @@ var receiver = window.parent.document.getElementById(document.body.id);
 if (receiver) {
   receiver.parentElement.className += " interscrollerAd";
 
-  //receiver.setAttribute('style', 'position:relative;width:100%;height:100vh;');
-  receiver.setAttribute('style', 'position:absolute;top:0;left:0;width:100%;height:100vh;clip:rect(auto, auto, auto, auto);z-index:1');
-
-  // this style gets overwritten with "display: inline", for some reason
-  //var childDiv = receiver.getElementsByTagName('div');
-  //childDiv ? childDiv[0].setAttribute('style', 'position:absolute;top:0;left:0;width:100%;height:100vh;clip:rect(auto, auto, auto, auto);') : null;
+  receiver.setAttribute('style', 'position:absolute;top:0;left:0;width:100%;height:100vh;clip:rect(auto, auto, auto, auto);z-index:1;');
 
   var iframe = receiver.getElementsByTagName('iframe');
   iframe ? iframe[0].setAttribute('style', 'position:fixed;width:100%;height:100vh;top:0;left:0;vertical-align:initial;border:0;') : null;
