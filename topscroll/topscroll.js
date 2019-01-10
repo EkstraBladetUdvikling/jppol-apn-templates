@@ -15,7 +15,8 @@ var receiver = window.parent.document.getElementById(document.body.id);
 if (receiver) {
   // calculate height
   // TODO: don't rely on access to native DOM-elements
-  var menuHeight = window.parent.document.getElementsByClassName('topbar').length ? window.parent.document.getElementsByClassName('topbar')[0].offsetHeight : 185;
+  var menuElements = '.topbar, #sitehead';
+  var menuHeight = window.parent.document.querySelector(menuElements) ? window.parent.document.querySelector(menuElements).offsetHeight : 185;
   var creativeHeight = window.parent.document.documentElement.clientHeight - menuHeight;
 
   // TODO: fix this, don't style native DOM-elements? Use class like in interscroller-template
