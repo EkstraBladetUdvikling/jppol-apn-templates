@@ -17,7 +17,8 @@
       parentSection: null
   };
   function initOverlay() {
-      bannerOnSite.domainString = '#{DOMAIN}';
+      var options = window.apnOptions;
+      bannerOnSite.domainString = options.domainString;
       var parentDoc = window.parent.document;
       bannerOnSite.parentBody = parentDoc.body;
       bannerOnSite.container = parentDoc.getElementById(document.body.id);

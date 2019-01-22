@@ -14,7 +14,8 @@ const bannerOnSite = {
   parentSection: null
 };
 export function initOverlay() {
-  bannerOnSite.domainString = '#{DOMAIN}';
+  const options = window.apnOptions;
+  bannerOnSite.domainString =  options.domainString;
   const parentDoc = window.parent.document;
   bannerOnSite.parentBody = parentDoc.body;
   bannerOnSite.container = parentDoc.getElementById(document.body.id);
