@@ -11,11 +11,11 @@ const bannerOnSite = {
   domainString: '',
   epaperIframe: null,
   parentBody: null,
-  parentSection: null
+  sectionParent: null
 };
 export function initOverlay() {
   const options = window.apnOptions;
-  bannerOnSite.domainString =  options.domainString;
+  bannerOnSite.domainString = options.domainString;
   const parentDoc = window.parent.document;
   bannerOnSite.parentBody = parentDoc.body;
   bannerOnSite.container = parentDoc.getElementById(document.body.id);
@@ -48,10 +48,10 @@ export function openOverlay() {
   bannerOnSite.epaperIframe.setAttribute('style', iframeStyling);
   bannerOnSite.epaperIframe.parentNode.setAttribute('style', iframeStyling);
   if (
-    bannerOnSite.parentSection === null &&
+    bannerOnSite.sectionParent === null &&
     bannerOnSite.domainString.toLowerCase() === 'politiken'
   ) {
-    let parent = bannerOnSite.container.parentSection;
+    let parent = bannerOnSite.container.parentNode;
     while (parent) {
       if (parent.nodeName === 'body') {
         break;
@@ -60,16 +60,16 @@ export function openOverlay() {
         parent.nodeName === 'SECTION' &&
         parent.classList.contains('container')
       ) {
-        bannerOnSite.parentSection = parent;
+        bannerOnSite.sectionParent = parent;
         break;
       } else {
-        parent = parent.parentSection;
+        parent = parent.parentNode;
       }
     }
   }
 
-  if (bannerOnSite.parentSection !== null) {
-    bannerOnSite.parentSection.style.position = 'static';
+  if (bannerOnSite.sectionParent !== null) {
+    bannerOnSite.sectionParent.style.position = 'static';
   }
   bannerOnSite.parentBody.style.overflow = 'hidden';
 }
@@ -79,8 +79,8 @@ export function closeOverlay() {
   bannerOnSite.container.setAttribute('style', containerStyling);
   const iframeStyling = '';
   bannerOnSite.epaperIframe.setAttribute('style', iframeStyling);
-  if (bannerOnSite.parentSection !== null) {
-    bannerOnSite.parentSection.style.position = 'relative';
+  if (bannerOnSite.sectionParent !== null) {
+    bannerOnSite.sectionParent.style.position = 'relative';
   }
   bannerOnSite.parentBody.style.overflow = '';
 }
