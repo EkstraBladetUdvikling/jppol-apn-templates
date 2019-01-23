@@ -14,10 +14,11 @@
       domainString: '',
       epaperIframe: null,
       parentBody: null,
-      parentSection: null
+      sectionParent: null
   };
   function initOverlay() {
-      bannerOnSite.domainString = '#{DOMAIN}';
+      var options = window.apnOptions;
+      bannerOnSite.domainString = options.domainString;
       var parentDoc = window.parent.document;
       bannerOnSite.parentBody = parentDoc.body;
       bannerOnSite.container = parentDoc.getElementById(document.body.id);
@@ -36,25 +37,25 @@
       var iframeStyling = "\n  height: 100%;\n  width: 100%;\n  ";
       bannerOnSite.epaperIframe.setAttribute('style', iframeStyling);
       bannerOnSite.epaperIframe.parentNode.setAttribute('style', iframeStyling);
-      if (bannerOnSite.parentSection === null &&
+      if (bannerOnSite.sectionParent === null &&
           bannerOnSite.domainString.toLowerCase() === 'politiken') {
-          var parent_1 = bannerOnSite.container.parentSection;
+          var parent_1 = bannerOnSite.container.parentNode;
           while (parent_1) {
               if (parent_1.nodeName === 'body') {
                   break;
               }
               if (parent_1.nodeName === 'SECTION' &&
                   parent_1.classList.contains('container')) {
-                  bannerOnSite.parentSection = parent_1;
+                  bannerOnSite.sectionParent = parent_1;
                   break;
               }
               else {
-                  parent_1 = parent_1.parentSection;
+                  parent_1 = parent_1.parentNode;
               }
           }
       }
-      if (bannerOnSite.parentSection !== null) {
-          bannerOnSite.parentSection.style.position = 'static';
+      if (bannerOnSite.sectionParent !== null) {
+          bannerOnSite.sectionParent.style.position = 'static';
       }
       bannerOnSite.parentBody.style.overflow = 'hidden';
   }
@@ -63,8 +64,8 @@
       bannerOnSite.container.setAttribute('style', containerStyling);
       var iframeStyling = '';
       bannerOnSite.epaperIframe.setAttribute('style', iframeStyling);
-      if (bannerOnSite.parentSection !== null) {
-          bannerOnSite.parentSection.style.position = 'relative';
+      if (bannerOnSite.sectionParent !== null) {
+          bannerOnSite.sectionParent.style.position = 'relative';
       }
       bannerOnSite.parentBody.style.overflow = '';
   }
