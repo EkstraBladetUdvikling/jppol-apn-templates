@@ -185,7 +185,7 @@ body, td, th {
   85% { transform: translateX(0px) rotate(0deg); }
   100% { transform: translateX(0px) rotate(0deg); }
 }
-@media only screen and (max-width : 640px) {
+@media only screen and (max-width : 600px) {
   .epaperBannerContent_center {
     text-align: center;
   }
