@@ -3,7 +3,7 @@ var mediaUrl = '${MEDIA_URL}';
 var clickUrl = '${CLICK_URL}';
 
 // custom AppNexus variables
-var arrowColor = '#{ARROW_COLOR}' || '#C00';
+var arrowColor = '#{ARROW_COLOR}' || 'FFF';
 
 // tracking pixels
 var defaultPixelUrl = 'https://www.url.com'; // this is set as default value in AppNexus Console.
@@ -15,7 +15,7 @@ var receiver = window.parent.document.getElementById(document.body.id);
 if (receiver) {
   // calculate height
   // TODO: don't rely on access to native DOM-elements
-  var menuElements = '.topbar, #sitehead';
+  var menuElements = '.topbar, #sitehead, .masthead';
   var menuHeight = window.parent.document.querySelector(menuElements) ? window.parent.document.querySelector(menuElements).offsetHeight : 185;
   var creativeHeight = window.parent.document.documentElement.clientHeight - menuHeight;
 
@@ -49,7 +49,7 @@ if (receiver) {
   // create svg arrow
   //
   var svgDiv = document.createElement('div');
-  svgDiv.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="' + arrowColor + '"><path d="M24 0C10.7 0 0 10.7 0 24s10.7 24 24 24 24-10.7 24-24S37.3 0 24 0zm13.4 21.4L24 34.8 10.6 21.4c-.8-.8-.8-2 0-2.8s2-.8 2.8 0L24 29.2l10.6-10.6c.8-.7 2.1-.6 2.8.2.7.8.7 1.9 0 2.6z"></path></svg>';
+  svgDiv.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="#' + arrowColor + '"><path d="M24 0C10.7 0 0 10.7 0 24s10.7 24 24 24 24-10.7 24-24S37.3 0 24 0zm13.4 21.4L24 34.8 10.6 21.4c-.8-.8-.8-2 0-2.8s2-.8 2.8 0L24 29.2l10.6-10.6c.8-.7 2.1-.6 2.8.2.7.8.7 1.9 0 2.6z"></path></svg>';
   // create scroll target, used for smooth scrolling
   var scrolToDiv = document.createElement('div');
   scrolToDiv.setAttribute('style', 'position:absolute;bottom:0');
@@ -57,7 +57,7 @@ if (receiver) {
   var animation = document.createElement('style');
   animation.innerHTML = '@keyframes fadeOutDown{0%{opacity:1}75%{opacity:0.8;transform:translate3d(0,10%,0)}100%{opacity:0;transform:translate3d(0,15%,0)}}';
   // style and click event
-  svgDiv.setAttribute('style', 'position:absolute;bottom:30px;left:50%;width:6%;min-width:25px;max-width:90px;height:auto;margin-left:-3%;cursor:pointer;transform:translate3d(0,-15%,0);animation:fadeOutDown ease 2s infinite');
+  svgDiv.setAttribute('style', 'position:absolute;bottom:30px;left:0;right:0;width:6%;min-width:25px;max-width:90px;height:auto;margin-left:auto;margin-right:auto;cursor:pointer;transform:translate3d(0,-15%,0);animation:fadeOutDown ease 2s infinite');
   svgDiv.addEventListener('click', function(e) {
     // scroll to content
     e.stopPropagation();
