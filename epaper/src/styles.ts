@@ -178,6 +178,9 @@ body, td, th {
   bottom: 0;
   left: 0;
 }
+.frontpage--pola {
+  height: 350px;
+}
 @keyframes movePointer {
   0% { transform: translateX(0px) rotate(0deg); }
   60% { transform: translateX(0px) rotate(0deg); }
