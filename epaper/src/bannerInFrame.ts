@@ -13,18 +13,20 @@ export function bannerInFrame() {
   const hasSecondFrontpage: boolean = options.hasSecondFrontpage === 'true';
   const backgroundColorTop: string = options.backgroundColorTop;
   const backgroundColor: string = options.backgroundColor;
+  const clickUrl: string = options.clickUrl;
   const mediaUrl: string = options.mediaUrl;
   const trackingPixel1: string = options.trackingPixel1;
   const trackingPixel2: string = options.trackingPixel2;
   const trackingPixel3: string = options.trackingPixel3;
   const domainString: string = options.domainString;
 
-  const urlqueorand = swipeBannerUrl.indexOf('?') !== -1 ? '&' : '?';
-  const theTarget =
-    swipeBannerUrl +
-    urlqueorand +
-    't=' +
-    encodeURIComponent(new Date().toString());
+  const urlAMPorQuery = swipeBannerUrl.indexOf('?') !== -1 ? '&' : '?';
+  // const theTarget =
+  //   swipeBannerUrl +
+  //   urlAMPorQuery +
+  //   't=' +
+  //   encodeURIComponent(new Date().toString());
+  const theTarget = `${clickUrl}${urlAMPorQuery}t=${encodeURIComponent(new Date().toString())}`;
 
   const body = document.body;
   const container = document.createElement('div');

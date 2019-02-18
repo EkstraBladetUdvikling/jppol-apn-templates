@@ -79,16 +79,19 @@
       var hasSecondFrontpage = options.hasSecondFrontpage === 'true';
       var backgroundColorTop = options.backgroundColorTop;
       var backgroundColor = options.backgroundColor;
+      var clickUrl = options.clickUrl;
       var mediaUrl = options.mediaUrl;
       var trackingPixel1 = options.trackingPixel1;
       var trackingPixel2 = options.trackingPixel2;
       var trackingPixel3 = options.trackingPixel3;
       var domainString = options.domainString;
-      var urlqueorand = swipeBannerUrl.indexOf('?') !== -1 ? '&' : '?';
-      var theTarget = swipeBannerUrl +
-          urlqueorand +
-          't=' +
-          encodeURIComponent(new Date().toString());
+      var urlAMPorQuery = swipeBannerUrl.indexOf('?') !== -1 ? '&' : '?';
+      // const theTarget =
+      //   swipeBannerUrl +
+      //   urlAMPorQuery +
+      //   't=' +
+      //   encodeURIComponent(new Date().toString());
+      var theTarget = "" + clickUrl + urlAMPorQuery + "t=" + encodeURIComponent(new Date().toString());
       var body = document.body;
       var container = document.createElement('div');
       container.id = 'epaper_eb_banner';
