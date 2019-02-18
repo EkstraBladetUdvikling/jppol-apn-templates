@@ -178,6 +178,9 @@ body, td, th {
   bottom: 0;
   left: 0;
 }
+.frontpage--pola {
+  height: 350px;
+}
 @keyframes movePointer {
   0% { transform: translateX(0px) rotate(0deg); }
   60% { transform: translateX(0px) rotate(0deg); }
@@ -185,7 +188,7 @@ body, td, th {
   85% { transform: translateX(0px) rotate(0deg); }
   100% { transform: translateX(0px) rotate(0deg); }
 }
-@media only screen and (max-width : 640px) {
+@media only screen and (max-width : 600px) {
   .epaperBannerContent_center {
     text-align: center;
   }
