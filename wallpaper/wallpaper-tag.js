@@ -22,11 +22,11 @@ ${CONTENT}
     if (clickTracker) {
       if (element.addEventListener) {
         element.addEventListener('click', function() {
-          clickUrl ? window.open(clickUrl + clickTracker, '_blank'): window.open(clickTracker, '_blank');
+          clickUrl ? window.top.open(clickUrl + clickTracker, '_blank') : window.top.open(clickTracker, '_blank');
         });
       } else if (element.attachEvent) {
         element.attachEvent('click', function() {
-          clickUrl ? window.open(clickUrl + clickTracker, '_blank'): window.open(clickTracker, '_blank');
+          clickUrl ? window.top.open(clickUrl + clickTracker, '_blank') : window.top.open(clickTracker, '_blank');
         });
       }
     }

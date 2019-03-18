@@ -16,7 +16,7 @@ if (receiver) {
   // calculate height
   // TODO: don't rely on access to native DOM-elements
   var menuElements = '.topbar, #sitehead, .masthead';
-  var menuHeight = window.parent.document.querySelector(menuElements) ? window.parent.document.querySelector(menuElements).offsetHeight : 185;
+  var menuHeight = window.top.document.querySelector(menuElements) ? window.top.document.querySelector(menuElements).offsetHeight : 185;
   var creativeHeight = window.parent.document.documentElement.clientHeight - menuHeight;
 
   // TODO: fix this, don't style native DOM-elements? Use class like in interscroller-template
@@ -32,7 +32,7 @@ if (receiver) {
   var imageDiv = document.createElement('div');
   imageDiv.setAttribute('style', 'position:fixed;width:100%;height:' + creativeHeight + 'px;background-image:url("' + mediaUrl + '");background-position:center;background-size:cover;background-repeat:no-repeat;background-attachment:fixed;cursor:pointer;z-index:1000');
   imageDiv.addEventListener('click', function() {
-    clickUrl.length ? window.open(clickUrl, '_blank') : null;
+    clickUrl.length ? window.top.open(clickUrl, '_blank') : null;
   });
 
   //
@@ -62,10 +62,10 @@ if (receiver) {
     // scroll to content
     e.stopPropagation();
     try {
-     scrolToDiv.scrollIntoView({behavior: "smooth",block: "start",inline: "nearest"});
+     scrolToDiv.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
     } catch (error) {
      // fallback without animation
-     window.scrollTo(0, imageDivHeight);
+     window.top.scrollTo(0, imageDivHeight);
     }
   });
 

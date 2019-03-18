@@ -38,11 +38,11 @@ if (element && wallpaperUrl) {
   // click event on wallpaper
 	if (element.addEventListener) {
     element.addEventListener('click', function() {
-      window.open(clickUrl, '_blank');
+      window.top.open(clickUrl, '_blank');
     });
 	} else if (element.attachEvent) {
     element.attachEvent('click', function() {
-      window.open(clickUrl, '_blank');
+      window.top.open(clickUrl, '_blank');
     });
 	}
 }

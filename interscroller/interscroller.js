@@ -22,7 +22,7 @@ if (receiver) {
 var imageDiv = document.createElement('div')
 imageDiv.setAttribute('style', 'position:fixed;width:100%;height:100vh;top:0;left:0;vertical-align:initial;background-image:url("' + mediaUrl + '");background-size:cover;background-repeat:no-repeat;background-position:center center;transform:translateZ(0px);cursor:pointer;');
 imageDiv.addEventListener('click', function() {
-  clickUrl.length ? window.open(clickUrl, '_blank') : null;
+  clickUrl.length ? window.top.open(clickUrl, '_blank') : null;
 });
 document.body.appendChild(imageDiv);
 
