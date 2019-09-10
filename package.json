@@ -14,8 +14,8 @@
     "@babel/core": "^7.1.6",
     "@babel/plugin-external-helpers": "^7.0.0",
     "@babel/preset-env": "^7.1.6",
-    "rollup": "^0.67.3",
+    "rollup": "^1.21.2",
     "rollup-plugin-babel": "^4.0.3",
-    "rollup-plugin-typescript2": "^0.18.0"
+    "rollup-plugin-typescript2": "^0.24.1"
   }
 }
