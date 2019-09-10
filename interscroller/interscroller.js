@@ -4,23 +4,62 @@ var clickUrl = '${CLICK_URL}';
 
 // tracking pixels
 var defaultPixelUrl = 'https://www.url.com'; // this is set as default value in AppNexus Console.
-var pixelUrl1 = ('#{PIXEL_URL1}' === defaultPixelUrl) ? '' : '#{PIXEL_URL1}';
-var pixelUrl2 = ('#{PIXEL_URL2}' === defaultPixelUrl) ? '' : '#{PIXEL_URL2}';
-var pixelUrl3 = ('#{PIXEL_URL3}' === defaultPixelUrl) ? '' : '#{PIXEL_URL3}';
+var pixelUrl1 = '#{PIXEL_URL1}' === defaultPixelUrl ? '' : '#{PIXEL_URL1}';
+var pixelUrl2 = '#{PIXEL_URL2}' === defaultPixelUrl ? '' : '#{PIXEL_URL2}';
+var pixelUrl3 = '#{PIXEL_URL3}' === defaultPixelUrl ? '' : '#{PIXEL_URL3}';
 
-// create styles and divs
-var receiver = window.parent.document.getElementById(document.body.id);
-if (receiver) {
-  receiver.parentElement.className += " interscrollerAd";
+var fixedElStyle = 'position:fixed;width:100%;height:100vh;';
 
-  receiver.setAttribute('style', 'position:absolute;top:0;left:0;width:100%;height:100vh;clip:rect(auto, auto, auto, auto);z-index:1;');
+function handleReceiver(bodyId, parEl) {
+  var receiver = parEl.parent.document.getElementById(bodyId);
+  if (receiver && receiver.tagName.toLowerCase() === 'div') {
+    receiver.parentElement.className += ' interscrollerAd';
 
-  var iframe = receiver.getElementsByTagName('iframe');
-  iframe ? iframe[0].setAttribute('style', 'position:fixed;width:100%;height:100vh;top:0;left:0;vertical-align:initial;border:0;') : null;
+    receiver.setAttribute(
+      'style',
+      'position:absolute;top:0;left:0;width:100%;height:100vh;clip:rect(auto, auto, auto, auto);z-index:1;'
+    );
+
+    var iframe = receiver.getElementsByTagName('iframe');
+    iframe
+      ? iframe[0].setAttribute(
+          'style',
+          'position:fixed;width:100%;height:100vh;top:0;left:0;vertical-align:initial;border:0;'
+        )
+      : null;
+  }
 }
 
-var imageDiv = document.createElement('div')
-imageDiv.setAttribute('style', 'position:fixed;width:100%;height:100vh;top:0;left:0;vertical-align:initial;background-image:url("' + mediaUrl + '");background-size:cover;background-repeat:no-repeat;background-position:center center;transform:translateZ(0px);cursor:pointer;');
+// create styles and divs
+var par = window.parent;
+var topper = window.top;
+var maxtests = 4;
+var index = 0;
+var bodyId = document.body.id;
+
+if (bodyId !== '' || par === topper) {
+  handleReceiver(bodyId, topper);
+} else {
+  while (bodyId === '' && index < maxtests) {
+    bodyId = par.document.body.id;
+
+    handleReceiver(bodyId, par);
+    var mediatedIframe = par.document.querySelector('iframe');
+    if (mediatedIframe) {
+      mediatedIframe.setAttribute('style', fixedElStyle);
+    }
+    par = par.parent;
+    index++;
+  }
+}
+
+var imageDiv = document.createElement('div');
+imageDiv.setAttribute(
+  'style',
+  'position:fixed;width:100%;height:100vh;top:0;left:0;vertical-align:initial;background-image:url("' +
+    mediaUrl +
+    '");background-size:cover;background-repeat:no-repeat;background-position:center center;transform:translateZ(0px);cursor:pointer;'
+);
 imageDiv.addEventListener('click', function() {
   clickUrl.length ? window.top.open(clickUrl, '_blank') : null;
 });
