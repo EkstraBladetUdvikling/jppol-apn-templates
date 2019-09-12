@@ -9,7 +9,7 @@ var wallpaperUrl = '#{WALLPAPER_FILE}';
 
 // tracking pixels
 var defaultPixelUrl = 'https://www.url.com'; // this is set as default value in AppNexus Console.
-var pixelUrl1 = ('#{PIXEL_URL1}' === defaultPixelUrl) ? '' : '#{PIXEL_URL1}';
+var pixelUrl1 = '#{PIXEL_URL1}' === defaultPixelUrl ? '' : '#{PIXEL_URL1}';
 
 // create top-banner, if mediaUrl is defined
 if (mediaUrl) {
@@ -33,18 +33,27 @@ if (mediaUrl) {
 // find wallpaper element
 var element = window.top.document.getElementById('wallpaperBackground');
 if (element && wallpaperUrl) {
-  element.setAttribute('style', 'display:block;background-color:transparent;background-image:url('+ wallpaperUrl +');background-position:center top;background-repeat:no-repeat;background-attachment:scroll;z-index:0;cursor:pointer;');
+  element.dataset.wallpaper = 'true';
+  element.setAttribute(
+    'style',
+    'display:block;background-color:transparent;background-image:url(' +
+      wallpaperUrl +
+      ');background-position:center top;background-repeat:no-repeat;background-attachment:scroll;z-index:0;cursor:pointer;'
+  );
+  if (window.top.jppolWallpaper) {
+    window.top.jppolWallpaper('template');
+  }
 
   // click event on wallpaper
-	if (element.addEventListener) {
+  if (element.addEventListener) {
     element.addEventListener('click', function() {
       window.top.open(clickUrl, '_blank');
     });
-	} else if (element.attachEvent) {
+  } else if (element.attachEvent) {
     element.attachEvent('click', function() {
       window.top.open(clickUrl, '_blank');
     });
-	}
+  }
 }
 
 // append tracking pixels
