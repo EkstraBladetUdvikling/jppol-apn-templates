@@ -16,13 +16,27 @@
       parentBody: null,
       sectionParent: null
   };
+  var iframeStyling = "\n  height: 100%;\n  width: 100%;\n  ";
   function initOverlay() {
       var options = window.apnOptions;
       bannerOnSite.domainString = options.domainString;
-      var parentDoc = window.parent.document;
-      bannerOnSite.parentBody = parentDoc.body;
-      bannerOnSite.container = parentDoc.getElementById(document.body.id);
+      var topper = window.top;
+      var topDoc = topper.document;
+      console.log('tilbudsavis tilbudsavis topDoc', topDoc);
+      bannerOnSite.parentBody = topDoc.body;
+      var par = window.parent;
+      var bodyId = document.body.id;
+      while (bodyId === '') {
+          console.log('tilbudsavis tilbudsavis par !== topper', par !== topper, par, topper);
+          if (par !== topper) {
+              par.document.querySelector('iframe').setAttribute('style', iframeStyling);
+          }
+          bodyId = par.document.body.id;
+          par = par.parent;
+      }
+      bannerOnSite.container = topDoc.getElementById(bodyId);
       if (bannerOnSite.container === null) {
+          throw new Error('TILBUDSAVIS no container!');
           return;
       }
       bannerOnSite.epaperIframe = bannerOnSite.container.querySelector('iframe');
@@ -34,7 +48,6 @@
       }
       var containerStyling = "\n  background: rgba( 0, 0, 0, .8);\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  padding: " + containerPadding + ";\n  z-index: " + 9999 * 9999 + ";\n  ";
       bannerOnSite.container.setAttribute('style', containerStyling);
-      var iframeStyling = "\n  height: 100%;\n  width: 100%;\n  ";
       bannerOnSite.epaperIframe.setAttribute('style', iframeStyling);
       bannerOnSite.epaperIframe.parentNode.setAttribute('style', iframeStyling);
       if (bannerOnSite.sectionParent === null &&
