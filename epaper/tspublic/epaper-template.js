@@ -35,6 +35,7 @@
       }
       bannerOnSite.container = topDoc.getElementById(document.body.id);
       if (bannerOnSite.container === null) {
+          throw new Error('TILBUDSAVIS no container!');
           return;
       }
       bannerOnSite.epaperIframe = bannerOnSite.container.querySelector('iframe');
