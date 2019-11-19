@@ -13,61 +13,74 @@
       container: null,
       domainString: '',
       epaperIframe: null,
-      parentBody: null,
-      sectionParent: null
+      sectionParent: null,
+      topBody: null
   };
+  var sizeStyling = "\n  height: 100%;\n  width: 100%;\n  ";
   function initOverlay() {
       var options = window.apnOptions;
-      bannerOnSite.domainString = options.domainString;
-      var parentDoc = window.parent.document;
-      bannerOnSite.parentBody = parentDoc.body;
-      bannerOnSite.container = parentDoc.getElementById(document.body.id);
+      bannerOnSite.domainString = options.domainString || '';
+      var topDoc = window.top.document;
+      bannerOnSite.topBody = topDoc.body;
+      console.log('initOverlay', topDoc, bannerOnSite.topBody);
+      console.log('initOverlay', window.top !== window.parent);
+      if (window.top !== window.parent) {
+          var parent_1 = window.parent;
+          var parentHead = parent_1.document.head;
+          var cssEl = document.createElement('style');
+          cssEl.type = 'text/css';
+          var styles = "\n    html, body, iframe {\n      " + sizeStyling + "\n    }\n    ";
+          cssEl.appendChild(document.createTextNode(styles));
+          parentHead.appendChild(cssEl);
+      }
+      bannerOnSite.container = topDoc.getElementById(document.body.id);
       if (bannerOnSite.container === null) {
           return;
       }
       bannerOnSite.epaperIframe = bannerOnSite.container.querySelector('iframe');
   }
   function openOverlay() {
+      initOverlay();
       var containerPadding = '0';
       if (window.innerWidth > 640) {
           containerPadding = '20px';
       }
       var containerStyling = "\n  background: rgba( 0, 0, 0, .8);\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  padding: " + containerPadding + ";\n  z-index: " + 9999 * 9999 + ";\n  ";
+      console.log('openOverlay', bannerOnSite.container);
       bannerOnSite.container.setAttribute('style', containerStyling);
-      var iframeStyling = "\n  height: 100%;\n  width: 100%;\n  ";
-      bannerOnSite.epaperIframe.setAttribute('style', iframeStyling);
-      bannerOnSite.epaperIframe.parentNode.setAttribute('style', iframeStyling);
+      bannerOnSite.epaperIframe.setAttribute('style', sizeStyling);
+      bannerOnSite.epaperIframe.parentNode.setAttribute('style', sizeStyling);
       if (bannerOnSite.sectionParent === null &&
           bannerOnSite.domainString.toLowerCase() === 'politiken') {
-          var parent_1 = bannerOnSite.container.parentNode;
-          while (parent_1) {
-              if (parent_1.nodeName === 'body') {
+          var parent_2 = bannerOnSite.container.parentNode;
+          while (parent_2) {
+              if (parent_2.nodeName === 'body') {
                   break;
               }
-              if (parent_1.nodeName === 'SECTION' &&
-                  parent_1.classList.contains('container')) {
-                  bannerOnSite.sectionParent = parent_1;
+              if (parent_2.nodeName === 'SECTION' &&
+                  parent_2.classList.contains('container')) {
+                  bannerOnSite.sectionParent = parent_2;
                   break;
               }
               else {
-                  parent_1 = parent_1.parentNode;
+                  parent_2 = parent_2.parentNode;
               }
           }
       }
       if (bannerOnSite.sectionParent !== null) {
           bannerOnSite.sectionParent.style.position = 'static';
       }
-      bannerOnSite.parentBody.style.overflow = 'hidden';
+      bannerOnSite.topBody.style.overflow = 'hidden';
   }
   function closeOverlay() {
       var containerStyling = '';
       bannerOnSite.container.setAttribute('style', containerStyling);
-      var iframeStyling = '';
-      bannerOnSite.epaperIframe.setAttribute('style', iframeStyling);
+      var closerStyling = '';
+      bannerOnSite.epaperIframe.setAttribute('style', closerStyling);
       if (bannerOnSite.sectionParent !== null) {
           bannerOnSite.sectionParent.style.position = 'relative';
       }
-      bannerOnSite.parentBody.style.overflow = '';
+      bannerOnSite.topBody.style.overflow = '';
   }
 
   var dimCloserButton = 84;
@@ -83,7 +96,7 @@
       var trackingPixel1 = options.trackingPixel1;
       var trackingPixel2 = options.trackingPixel2;
       var trackingPixel3 = options.trackingPixel3;
-      var domainString = options.domainString;
+      var domainString = options.domainString || '';
       var urlqueorand = swipeBannerUrl.indexOf('?') !== -1 ? '&' : '?';
       var theTarget = swipeBannerUrl +
           urlqueorand +

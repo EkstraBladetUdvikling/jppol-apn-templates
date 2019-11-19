@@ -10,15 +10,38 @@ const bannerOnSite = {
   container: null,
   domainString: '',
   epaperIframe: null,
-  parentBody: null,
-  sectionParent: null
+  sectionParent: null,
+  topBody: null
 };
+const sizeStyling = `
+  height: 100%;
+  width: 100%;
+  `;
 export function initOverlay() {
   const options = window.apnOptions;
-  bannerOnSite.domainString = options.domainString;
-  const parentDoc = window.parent.document;
-  bannerOnSite.parentBody = parentDoc.body;
-  bannerOnSite.container = parentDoc.getElementById(document.body.id);
+  bannerOnSite.domainString = options.domainString || '';
+  const topDoc = window.top.document;
+  bannerOnSite.topBody = topDoc.body;
+  console.log('initOverlay', topDoc, bannerOnSite.topBody);
+  console.log('initOverlay', window.top !== window.parent);
+
+  if (window.top !== window.parent) {
+    const parent = window.parent;
+    const parentHead = parent.document.head;
+    const cssEl = document.createElement('style') as HTMLStyleElement;
+    cssEl.type = 'text/css';
+    const styles = `
+    html, body, iframe {
+      ${sizeStyling}
+    }
+    `;
+
+    cssEl.appendChild(document.createTextNode(styles));
+
+    parentHead.appendChild(cssEl);
+  }
+
+  bannerOnSite.container = topDoc.getElementById(document.body.id);
   if (bannerOnSite.container === null) {
     return;
   }
@@ -26,6 +49,7 @@ export function initOverlay() {
 }
 
 export function openOverlay() {
+  initOverlay();
   let containerPadding = '0';
   if (window.innerWidth > 640) {
     containerPadding = '20px';
@@ -40,13 +64,11 @@ export function openOverlay() {
   padding: ${containerPadding};
   z-index: ${9999 * 9999};
   `;
+  console.log('openOverlay', bannerOnSite.container);
   bannerOnSite.container.setAttribute('style', containerStyling);
-  const iframeStyling = `
-  height: 100%;
-  width: 100%;
-  `;
-  bannerOnSite.epaperIframe.setAttribute('style', iframeStyling);
-  bannerOnSite.epaperIframe.parentNode.setAttribute('style', iframeStyling);
+
+  bannerOnSite.epaperIframe.setAttribute('style', sizeStyling);
+  bannerOnSite.epaperIframe.parentNode.setAttribute('style', sizeStyling);
   if (
     bannerOnSite.sectionParent === null &&
     bannerOnSite.domainString.toLowerCase() === 'politiken'
@@ -71,16 +93,16 @@ export function openOverlay() {
   if (bannerOnSite.sectionParent !== null) {
     bannerOnSite.sectionParent.style.position = 'static';
   }
-  bannerOnSite.parentBody.style.overflow = 'hidden';
+  bannerOnSite.topBody.style.overflow = 'hidden';
 }
 
 export function closeOverlay() {
   const containerStyling = '';
   bannerOnSite.container.setAttribute('style', containerStyling);
-  const iframeStyling = '';
-  bannerOnSite.epaperIframe.setAttribute('style', iframeStyling);
+  const closerStyling = '';
+  bannerOnSite.epaperIframe.setAttribute('style', closerStyling);
   if (bannerOnSite.sectionParent !== null) {
     bannerOnSite.sectionParent.style.position = 'relative';
   }
-  bannerOnSite.parentBody.style.overflow = '';
+  bannerOnSite.topBody.style.overflow = '';
 }

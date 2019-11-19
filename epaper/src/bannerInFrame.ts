@@ -17,7 +17,7 @@ export function bannerInFrame() {
   const trackingPixel1: string = options.trackingPixel1;
   const trackingPixel2: string = options.trackingPixel2;
   const trackingPixel3: string = options.trackingPixel3;
-  const domainString: string = options.domainString;
+  const domainString: string = options.domainString || '';
 
   const urlqueorand = swipeBannerUrl.indexOf('?') !== -1 ? '&' : '?';
   const theTarget =
