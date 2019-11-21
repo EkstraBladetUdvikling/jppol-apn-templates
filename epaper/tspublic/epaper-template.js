@@ -29,14 +29,13 @@
           var parentHead = parent_1.document.head;
           var cssEl = document.createElement('style');
           cssEl.type = 'text/css';
-          var styles = "\n    html, body, iframe {\n      " + sizeStyling + "\n    }\n    ";
+          var styles = "\n    html, body, iframe, div {\n      " + sizeStyling + "\n    }\n    ";
           cssEl.appendChild(document.createTextNode(styles));
           parentHead.appendChild(cssEl);
       }
       bannerOnSite.container = topDoc.getElementById(document.body.id);
       if (bannerOnSite.container === null) {
           throw new Error('TILBUDSAVIS no container!');
-          return;
       }
       bannerOnSite.epaperIframe = bannerOnSite.container.querySelector('iframe');
   }

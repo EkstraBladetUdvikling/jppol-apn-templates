@@ -31,7 +31,7 @@ export function initOverlay() {
     const cssEl = document.createElement('style') as HTMLStyleElement;
     cssEl.type = 'text/css';
     const styles = `
-    html, body, iframe {
+    html, body, iframe, div {
       ${sizeStyling}
     }
     `;
