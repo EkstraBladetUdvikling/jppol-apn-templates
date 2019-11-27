@@ -24,10 +24,11 @@ export function initOverlay() {
   bannerOnSite.topBody = topDoc.body;
   console.log('initOverlay', topDoc, bannerOnSite.topBody);
   console.log('initOverlay', window.top !== window.parent);
-
+  let containerId = document.body.id;
   if (window.top !== window.parent) {
     const parent = window.parent;
     const parentHead = parent.document.head;
+    containerId = parent.document.body.id;
     const cssEl = document.createElement('style') as HTMLStyleElement;
     cssEl.type = 'text/css';
     const styles = `
@@ -41,7 +42,7 @@ export function initOverlay() {
     parentHead.appendChild(cssEl);
   }
 
-  bannerOnSite.container = topDoc.getElementById(document.body.id);
+  bannerOnSite.container = topDoc.getElementById(containerId);
   if (bannerOnSite.container === null) {
     throw new Error('TILBUDSAVIS no container!');
     return;

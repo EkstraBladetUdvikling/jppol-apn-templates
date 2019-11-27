@@ -24,16 +24,18 @@
       bannerOnSite.topBody = topDoc.body;
       console.log('initOverlay', topDoc, bannerOnSite.topBody);
       console.log('initOverlay', window.top !== window.parent);
+      var containerId = document.body.id;
       if (window.top !== window.parent) {
           var parent_1 = window.parent;
           var parentHead = parent_1.document.head;
+          containerId = parent_1.document.body.id;
           var cssEl = document.createElement('style');
           cssEl.type = 'text/css';
           var styles = "\n    html, body, iframe, div {\n      " + sizeStyling + "\n    }\n    ";
           cssEl.appendChild(document.createTextNode(styles));
           parentHead.appendChild(cssEl);
       }
-      bannerOnSite.container = topDoc.getElementById(document.body.id);
+      bannerOnSite.container = topDoc.getElementById(containerId);
       if (bannerOnSite.container === null) {
           throw new Error('TILBUDSAVIS no container!');
       }
