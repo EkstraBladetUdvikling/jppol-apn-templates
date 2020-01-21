@@ -1,6 +1,7 @@
 window.apnOptions = {
   backgroundColorTop: '#{BACKGROUNDCOLORTOP}',
   backgroundColor: '#{BACKGROUNDCOLOR}',
+  clickUrl: '${CLICK_URL}',
   domainString: '#{DOMAIN}',
   hasSecondFrontpage: '#{SECONDFRONTPAGE}',
   mediaUrl: '${MEDIA_URL}',
