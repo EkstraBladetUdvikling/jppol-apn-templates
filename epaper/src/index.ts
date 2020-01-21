@@ -4,5 +4,5 @@ import { initOverlay } from './bannerOnSite';
 window.addEventListener('load', () => {
   bannerInFrame();
   initOverlay();
-  console.log('oooh ${CLICK_URL}');
+  /*! oooh ${CLICK_URL} */
 });

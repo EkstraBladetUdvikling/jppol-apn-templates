@@ -3,7 +3,18 @@ import { styles } from './styles';
 
 declare global {
   interface Window {
-    apnOptions: any;
+    apnOptions: {
+      backgroundColorTop: string;
+      backgroundColor: string;
+      clickUrl: string;
+      domainString: string;
+      hasSecondFrontpage: string;
+      mediaUrl: string;
+      swipeBannerUrl: string;
+      trackingPixel1: string;
+      trackingPixel2: string;
+      trackingPixel3: string;
+    };
   }
 }
 
@@ -13,6 +24,7 @@ export function bannerInFrame() {
   const hasSecondFrontpage: boolean = options.hasSecondFrontpage === 'true';
   const backgroundColorTop: string = options.backgroundColorTop;
   const backgroundColor: string = options.backgroundColor;
+  const clickUrl: string = options.clickUrl;
   const mediaUrl: string = options.mediaUrl;
   const trackingPixel1: string = options.trackingPixel1;
   const trackingPixel2: string = options.trackingPixel2;
@@ -114,6 +126,12 @@ export function bannerInFrame() {
       epaperBannerContent.classList.add(classArg);
       epaperBannerTxt.style.display = 'none';
       epaperBannerPointer.style.display = 'none';
+
+      if (clickUrl) {
+        const clickUrlTrackingImg3 = document.createElement('img');
+        clickUrlTrackingImg3.src = clickUrl;
+        body.appendChild(clickUrlTrackingImg3);
+      }
 
       if (
         trackingPixel1.indexOf('TRACKINGURL1') === -1 &&

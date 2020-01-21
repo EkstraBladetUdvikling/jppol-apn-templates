@@ -94,6 +94,7 @@
       var hasSecondFrontpage = options.hasSecondFrontpage === 'true';
       var backgroundColorTop = options.backgroundColorTop;
       var backgroundColor = options.backgroundColor;
+      var clickUrl = options.clickUrl;
       var mediaUrl = options.mediaUrl;
       var trackingPixel1 = options.trackingPixel1;
       var trackingPixel2 = options.trackingPixel2;
@@ -176,6 +177,11 @@
               epaperBannerContent.classList.add(classArg);
               epaperBannerTxt.style.display = 'none';
               epaperBannerPointer.style.display = 'none';
+              if (clickUrl) {
+                  var clickUrlTrackingImg3 = document.createElement('img');
+                  clickUrlTrackingImg3.src = clickUrl;
+                  body.appendChild(clickUrlTrackingImg3);
+              }
               if (trackingPixel1.indexOf('TRACKINGURL1') === -1 &&
                   trackingPixel1.indexOf('ebimg.dk') === -1) {
                   var trackingImg1 = document.createElement('img');
@@ -232,7 +238,7 @@
   window.addEventListener('load', function () {
       bannerInFrame();
       initOverlay();
-      console.log('oooh ${CLICK_URL}');
+      /*! oooh ${CLICK_URL} */
   });
 
 }());
