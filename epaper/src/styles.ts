@@ -94,7 +94,6 @@ body, td, th {
 }
 #epaperBannerTxt {}
 #epaperBannerPointer {
-  display: none;
 	width:30px;
 	height:30px;
 	overflow:visible;
