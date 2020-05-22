@@ -17,7 +17,7 @@ if (receiver) {
   // if an offsetElement is found it will be used instead of the menu height.
   // TODO: don't rely on access to native DOM-elements
   var offsetElements = window.top.document.querySelector('#fnTicker');
-  var menuElements = window.top.document.querySelector('.topbar, #sitehead, .masthead');
+  var menuElements = window.top.document.querySelector('.topbar, #sitehead, .masthead, .globalHeader, #wrapHeader');
   var whitespace = 185;
 
   if (offsetElements) {
