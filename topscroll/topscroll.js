@@ -22,6 +22,10 @@ if (receiver) {
 
   if (offsetElements) {
     whitespace = offsetElements.offsetTop;
+
+    if (receiver.parentElement.offsetHeight > 0) {
+      whitespace = whitespace - receiver.parentElement.offsetHeight;
+    } 
   } else if(menuElements) {
     var whitespace = menuElements.offsetHeight;
   }
