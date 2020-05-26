@@ -14,10 +14,23 @@ var pixelUrl3 = ('#{PIXEL_URL3}' === defaultPixelUrl) ? '' : '#{PIXEL_URL3}';
 var receiver = window.parent.document.getElementById(document.body.id);
 if (receiver) {
   // calculate height
+  // if an offsetElement is found it will be used instead of the menu height.
   // TODO: don't rely on access to native DOM-elements
-  var menuElements = '.topbar, #sitehead, .masthead';
-  var menuHeight = window.top.document.querySelector(menuElements) ? window.top.document.querySelector(menuElements).offsetHeight : 185;
-  var creativeHeight = window.parent.document.documentElement.clientHeight - menuHeight;
+  var offsetElements = window.top.document.querySelector('#fnTicker');
+  var menuElements = window.top.document.querySelector('.topbar, #sitehead, .masthead, .globalHeader, #wrapHeader');
+  var whitespace = 185;
+
+  if (offsetElements) {
+    whitespace = offsetElements.offsetTop;
+
+    if (receiver.parentElement.offsetHeight > 0) {
+      whitespace = whitespace - receiver.parentElement.offsetHeight;
+    } 
+  } else if(menuElements) {
+    var whitespace = menuElements.offsetHeight;
+  }
+
+  var creativeHeight = window.parent.document.documentElement.clientHeight - whitespace;
 
   // TODO: fix this, don't style native DOM-elements? Use class like in interscroller-template
   receiver.parentElement.className += " interscrollerAd";
