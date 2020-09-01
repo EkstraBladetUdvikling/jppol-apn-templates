@@ -17,14 +17,18 @@ function handleReceiver(bodyId, parEl) {
 
     receiver.setAttribute(
       'style',
-      'position:absolute;top:0;left:0;width:100%;height:100vh;clip:rect(auto, auto, auto, auto);z-index:1;'
+      'position:absolute;top:0;left:0;width:100%;height:100vh;clip:rect(auto, auto, auto, auto);z-index:1;cursor:pointer;'
     );
+
+    receiver.addEventListener('click', function () {
+      clickUrl.length ? window.top.open(clickUrl, '_blank') : null;
+    });
 
     var iframe = receiver.getElementsByTagName('iframe');
     iframe
       ? iframe[0].setAttribute(
           'style',
-          'position:fixed;width:100%;height:100vh;top:0;left:0;vertical-align:initial;border:0;'
+          'position:fixed;width:100%;height:100vh;top:0;left:0;vertical-align:initial;border:0;pointer-events:none;'
         )
       : null;
   }
@@ -58,11 +62,8 @@ try {
     'style',
     'position:fixed;width:100%;height:100vh;top:0;left:0;vertical-align:initial;background-image:url("' +
       mediaUrl +
-      '");background-size:cover;background-repeat:no-repeat;background-position:center center;transform:translateZ(0px);cursor:pointer;'
+      '");background-size:cover;background-repeat:no-repeat;background-position:center center;transform:translateZ(0px);'
   );
-  imageDiv.addEventListener('click', function() {
-    clickUrl.length ? window.top.open(clickUrl, '_blank') : null;
-  });
   document.body.appendChild(imageDiv);
 
   // append tracking pixels

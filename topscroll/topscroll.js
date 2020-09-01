@@ -14,13 +14,26 @@ try {
   var receiver = window.parent.document.getElementById(document.body.id);
   if (receiver) {
     // calculate height
+    // if an offsetElement is found it will be used instead of the menu height.
     // TODO: don't rely on access to native DOM-elements
-    var menuElements = '.topbar, #sitehead, .masthead';
-    var menuHeight = window.top.document.querySelector(menuElements)
-      ? window.top.document.querySelector(menuElements).offsetHeight
-      : 185;
+    var offsetElements = window.top.document.querySelector('#fnTicker');
+    var menuElements = window.top.document.querySelector(
+      '.topbar, #sitehead, .masthead, .globalHeader, #wrapHeader'
+    );
+    var whitespace = 185;
+
+    if (offsetElements) {
+      whitespace = offsetElements.offsetTop;
+
+      if (receiver.parentElement.offsetHeight > 0) {
+        whitespace = whitespace - receiver.parentElement.offsetHeight;
+      }
+    } else if (menuElements) {
+      var whitespace = menuElements.offsetHeight;
+    }
+
     var creativeHeight =
-      window.parent.document.documentElement.clientHeight - menuHeight;
+      window.parent.document.documentElement.clientHeight - whitespace;
 
     // TODO: fix this, don't style native DOM-elements? Use class like in interscroller-template
     receiver.parentElement.className += ' interscrollerAd';
@@ -49,7 +62,7 @@ try {
         mediaUrl +
         '");background-position:center;background-size:cover;background-repeat:no-repeat;background-attachment:fixed;cursor:pointer;z-index:1000'
     );
-    imageDiv.addEventListener('click', function() {
+    imageDiv.addEventListener('click', function () {
       clickUrl.length ? window.top.open(clickUrl, '_blank') : null;
     });
 
@@ -86,14 +99,14 @@ try {
       'style',
       'position:absolute;bottom:30px;left:0;right:0;width:6%;min-width:25px;max-width:90px;height:auto;margin-left:auto;margin-right:auto;cursor:pointer;transform:translate3d(0,-15%,0);animation:fadeOutDown ease 2s infinite'
     );
-    svgDiv.addEventListener('click', function(e) {
+    svgDiv.addEventListener('click', function (e) {
       // scroll to content
       e.stopPropagation();
       try {
         scrolToDiv.scrollIntoView({
           behavior: 'smooth',
           block: 'start',
-          inline: 'nearest'
+          inline: 'nearest',
         });
       } catch (error) {
         // fallback without animation
