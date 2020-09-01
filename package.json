@@ -1,6 +1,6 @@
 {
   "name": "jppol-apn-templates",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "repository": "https://github.com/EkstraBladetUdvikling/jppol-apn-templates.git",
   "author": "Tegner <jesper.h.tegner@jppol.dk>",
