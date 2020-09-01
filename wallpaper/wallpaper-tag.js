@@ -1,6 +1,4 @@
-(function() {
-  'use strict';
-
+try {
   // Custom variables
   var wallpaperUrl = '#{WALLPAPER_FILE}';
   // find wallpaper element
@@ -51,6 +49,8 @@
     pixel1.style.display = 'none';
     document.body.appendChild(pixel1);
   }
-})();
+} catch (error) {
+  console.log('wallpaper error', error);
+}
 
 ${CONTENT}
