@@ -1,9 +1,39 @@
 # jppol-apn-templates
 
-All AppNexus templates for JPPol
+All ~~AppNexus~~ Xandr templates for JPPol
 
-## epaper
+After changes is done the content of the output file(see which file should be sent below) is sent to adops, for them to implement in the Xandr backend
 
-### test
+Send as txt file to adops@jppol.dk subject line: **Ny [template navn] template**
 
-Test should be run in a browser with cors disabled
+Sent the content of the following files
+### epaper
+
+```
+epaper/output/epaper-template.min.js
+```
+
+### interscroller
+
+```
+interscroller/interscroller.js
+```
+
+### takeover
+
+```
+takeover/output/takeover-template.min.js
+```
+
+### topscroll
+
+```
+topscroll/topscroll.js
+```
+
+### wallpaper
+
+```
+wallpaper/wallpaper-tag.js
+wallpaper/wallpaper-upload.js
+```
