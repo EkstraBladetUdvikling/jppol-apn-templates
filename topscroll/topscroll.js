@@ -100,6 +100,7 @@ try {
       'position:absolute;bottom:30px;left:0;right:0;width:6%;min-width:25px;max-width:90px;height:auto;margin-left:auto;margin-right:auto;cursor:pointer;transform:translate3d(0,-15%,0);animation:fadeOutDown ease 2s infinite'
     );
     svgDiv.addEventListener('click', function (e) {
+      var currentScrollPos = document.documentElement.scrollTop;
       // scroll to content
       e.stopPropagation();
       try {
@@ -110,6 +111,12 @@ try {
         });
       } catch (error) {
         // fallback without animation
+        window.top.scrollTo(0, imageDivHeight);
+      }
+
+      // some browsers like ie11 thinks it supports scrollIntoView, because it does without options.
+      // so the try dosent fail but scrollIntoView didnt move the page at all, therefore this little test
+      if (document.documentElement.scrollTop !== currentScrollPos) {
         window.top.scrollTo(0, imageDivHeight);
       }
     });
