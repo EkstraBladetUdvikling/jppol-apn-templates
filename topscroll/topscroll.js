@@ -117,7 +117,11 @@ try {
       // some browsers like ie11 thinks it supports scrollIntoView, because it does without options.
       // so the try dosent fail but scrollIntoView didnt move the page at all, therefore this little test
       setTimeout(function () {
-        if (document.documentElement.scrollTop === currentScrollPos) {
+        var testScrollPos = document.documentElement.scrollTop;
+        if (
+          testScrollPos === currentScrollPos &&
+          testScrollPos < creativeHeight
+        ) {
           window.top.scrollTo(0, creativeHeight);
         }
       }, 1000);
