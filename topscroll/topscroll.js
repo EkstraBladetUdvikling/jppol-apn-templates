@@ -111,14 +111,16 @@ try {
         });
       } catch (error) {
         // fallback without animation
-        window.top.scrollTo(0, imageDivHeight);
+        window.top.scrollTo(0, creativeHeight);
       }
 
       // some browsers like ie11 thinks it supports scrollIntoView, because it does without options.
       // so the try dosent fail but scrollIntoView didnt move the page at all, therefore this little test
-      if (document.documentElement.scrollTop !== currentScrollPos) {
-        window.top.scrollTo(0, imageDivHeight);
-      }
+      setTimeout(function () {
+        if (document.documentElement.scrollTop === currentScrollPos) {
+          window.top.scrollTo(0, creativeHeight);
+        }
+      }, 1000);
     });
 
     // append elements
