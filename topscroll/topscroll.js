@@ -103,28 +103,17 @@ try {
       var currentScrollPos = document.documentElement.scrollTop;
       // scroll to content
       e.stopPropagation();
-      try {
+
+      if ('scrollBehavior' in document.documentElement.style) {
         scrolToDiv.scrollIntoView({
           behavior: 'smooth',
           block: 'start',
           inline: 'nearest',
         });
-      } catch (error) {
+      } else {
         // fallback without animation
         window.top.scrollTo(0, creativeHeight);
       }
-
-      // some browsers like ie11 thinks it supports scrollIntoView, because it does without options.
-      // so the try dosent fail but scrollIntoView didnt move the page at all, therefore this little test
-      setTimeout(function () {
-        var testScrollPos = document.documentElement.scrollTop;
-        if (
-          testScrollPos === currentScrollPos &&
-          testScrollPos < creativeHeight
-        ) {
-          window.top.scrollTo(0, creativeHeight);
-        }
-      }, 1000);
     });
 
     // append elements
