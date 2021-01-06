@@ -102,15 +102,16 @@ try {
     svgDiv.addEventListener('click', function (e) {
       // scroll to content
       e.stopPropagation();
-      try {
+
+      if ('scrollBehavior' in document.documentElement.style) {
         scrolToDiv.scrollIntoView({
           behavior: 'smooth',
           block: 'start',
           inline: 'nearest',
         });
-      } catch (error) {
+      } else {
         // fallback without animation
-        window.top.scrollTo(0, imageDivHeight);
+        window.top.scrollTo(0, creativeHeight);
       }
     });
 
