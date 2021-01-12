@@ -18,7 +18,7 @@ try {
     // TODO: don't rely on access to native DOM-elements
     var offsetElements = window.top.document.querySelector('#fnTicker');
     var menuElements = window.top.document.querySelector(
-      '.topbar, #sitehead, .navmenu, .masthead, .globalHeader, #wrapHeader'
+      '.topbar, #sitehead, .jp-header, .navmenu, .masthead, .globalHeader, #wrapHeader'
     );
     var whitespace = 185;
 
